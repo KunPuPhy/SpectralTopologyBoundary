@@ -1,0 +1,17 @@
+\babel@toc {english}{}\relax 
+\contentsline {title}{谱学的拓扑效应：任意二能级系统中谱函数与 Bragg 谱信号的普适形式}{1}{section*.2}%
+\contentsline {abstract}{Abstract}{1}{section*.1}%
+\tocdepth@munge 
+\contentsline {section}{\numberline {}Contents}{1}{section*.3}%
+\tocdepth@restore 
+\contentsline {section}{\numberline {I}谱函数与 Bragg 谱信号的一般理论}{2}{section*.4}%
+\contentsline {subsection}{\numberline {A}谱函数的一般定义与概念}{2}{section*.5}%
+\contentsline {subsection}{\numberline {B}一般二能级系统中谱函数的一般形式}{3}{section*.6}%
+\contentsline {subsection}{\numberline {C}Bragg 谱的一般定义与概念}{4}{section*.7}%
+\contentsline {subsection}{\numberline {D}一般二能级系统中 Bragg 谱的一般形式}{4}{section*.8}%
+\contentsline {subsection}{\numberline {E}模型实例：Kitaev 链与 false-positive 变体的哈密顿量}{5}{section*.9}%
+\appendix 
+\contentsline {section}{\numberline {A}二能级系统的 Bloch 球表示与谱投影算符}{7}{section*.10}%
+\contentsline {section}{\numberline {B}谱函数一般形式的推导细节}{8}{section*.11}%
+\contentsline {section}{\numberline {C}Bragg 谱一般形式的推导细节}{9}{section*.12}%
+\contentsline {section}{\numberline {}References}{10}{section*.13}%

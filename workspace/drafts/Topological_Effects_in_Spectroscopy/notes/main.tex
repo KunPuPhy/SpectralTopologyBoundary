@@ -1,0 +1,401 @@
+\documentclass[onecolumn,aps,prl,superscriptaddress,longbibliography]{revtex4-2}
+\setcounter{secnumdepth}{3}
+\usepackage[colorlinks,bookmarks=false,citecolor=blue,linkcolor=red,urlcolor=blue]{hyperref}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{amsmath,amssymb,bm,braket,float,mathtools}
+\usepackage{unicode-math}
+\usepackage{graphicx,xfrac,appendix}
+\usepackage[english]{babel}
+\usepackage{physics}
+\usepackage{ctex}
+\usepackage{bbm}
+\usepackage{subfigure}
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{epstopdf}
+
+
+\makeatother
+%\documentclass[prb,twocolumn,showpacs,longbibliography]{revtex4-1}
+%\usepackage{xcolor}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{graphicx}
+%\usepackage{amsmath}
+%\usepackage{physics}
+%\usepackage{float}
+%\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=red,urlcolor=blue,citecolor=blue,pdftitle={Title},pdfauthor={},pdfdisplaydoctitle=true,pdfduplex=DuplexFlipLongEdge]{hyperref}
+%
+
+\begin{document}	
+
+\title{谱学的拓扑效应：任意二能级系统中谱函数与 Bragg 谱信号的普适形式}
+\author{Kun Pu}
+\email{kunpuphy@zjnu.edu.cn}
+\affiliation{Department of Physics, Zhejiang Normal University, Jinhua 321004, China}
+\date{\today}
+
+\begin{abstract}
+本文首先给出单粒子谱函数与 Bragg 谱（动力学结构因子）的一般定义与概念——推迟 Green 函数、Lehmann 表示、求和规则与涨落--耗散关系，然后在一般二能级系统 $\mathcal{H}(k) = d_0(k)\mathbb{1} + \mathbf{d}(k)\cdot\symbf{\sigma}$ 中导出二者信号的一般形式：谱函数由上下带两条 $\delta$ 线组成，在内态 $\alpha$（$\sigma_z = +1$）上的强度为 $\pi\left(1 \pm d_z/|\mathbf{d}|\right)$；Bragg 谱（BEC/单粒子初态）由带内、带间两条 $\delta$ 线组成，强度为 $N\frac{1\pm\cos\Theta}{2} = N\cos^2\frac{\Theta}{2},\ N\sin^2\frac{\Theta}{2}$，其中 $\cos\Theta = \hat{\mathbf{d}}(k_0+q)\cdot\hat{\mathbf{d}}(k_0)$ 为 Bloch 球上两点的测地角距。两个公式共享同一量子距离结构 $w = \frac{1}{2}(1 \mp \hat{\mathbf{a}}\cdot\hat{\mathbf{b}})$，分别对应固定外部轴与轨迹自身两种参考。推导细节置于附录。
+\end{abstract}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+%%%%%%%%% 正文 %%%%%%%
+\section{谱函数与 Bragg 谱信号的一般理论}\label{sec:theory}
+
+动量分辨的谱学探针中，单粒子谱函数（由角分辨光电子谱 ARPES 与扫描隧道谱 STS 测量）探测\textbf{单体}激发，Bragg 谱（动力学结构因子，由冷原子双光子 Bragg 散射测量）探测\textbf{两体}密度激发。本节对二者依次给出一般定义与概念（\ref{sec:spsf_def}、\ref{sec:bragg_def} 小节），并在一般二能级系统中导出其信号的一般形式（\ref{sec:spsf_form}、\ref{sec:bragg_form} 小节）；全部推导的代数细节置于附录 A--C。全文约定 $\hbar = 1$、零温。
+
+\subsection{谱函数的一般定义与概念}\label{sec:spsf_def}
+
+\textbf{定义。}对含内态指标 $\alpha,\beta$（子格/自旋/Nambu 基）的费米子系统，定义推迟 Green 函数与单粒子谱函数 \cite{estakeRoy2025}：
+\begin{equation}\label{eq:green_def}
+G^R_{\alpha\beta}(k,t) = -i\,\theta(t)\,\langle G|\{\hat{c}_{k,\alpha}(t),\,\hat{c}^\dagger_{k,\beta}(0)\}|G\rangle,
+\qquad
+A_{\alpha\beta}(k,\omega) \equiv -2\,\mathrm{Im}\,G^R_{\alpha\beta}(k,\omega),
+\end{equation}
+其中 $|G\rangle$ 为（多体）基态；$\theta(t)$ 为 \textbf{Heaviside 单位阶跃函数}
+\begin{equation}\label{eq:heaviside}
+\theta(t) = \begin{cases} 1, & t > 0\\ 0, & t < 0 \end{cases}
+\end{equation}
+（$t = 0$ 处的取值不影响谱函数），它截断时间演化、保证\textbf{因果性}：推迟函数只在 $t\geq 0$ 非零，描述系统对"先前"扰动的响应；这正是"推迟"（retarded）一词的含义。对角元 $A_{\alpha\alpha} \geq 0$。
+
+\textbf{概念一：Lehmann 表示——谱函数是单粒子激发谱的完备刻画。}对完备多体末态 $\{|n\rangle\}$ 插入单位分解，得（从时域定义到该式的完整推导——Heisenberg 相位、Fourier 变换收敛因子与 Sokhotski--Plemelj 取虚部——见附录~\ref{app:spsf_detail}）
+\begin{equation}\label{eq:lehmann_spsf}
+A_{\alpha\beta}(k,\omega) = 2\pi\sum_n \langle G|\hat{c}_{k,\alpha}|n\rangle\langle n|\hat{c}^\dagger_{k,\beta}|G\rangle\,\delta\big(\omega - (E_n - E_G)\big)
++ 2\pi\sum_n \langle G|\hat{c}^\dagger_{k,\beta}|n\rangle\langle n|\hat{c}_{k,\alpha}|G\rangle\,\delta\big(\omega + (E_n - E_G)\big),
+\end{equation}
+第一项为\textbf{粒子添加支}（末态 $N+1$ 粒子，$\omega > 0$），第二项为\textbf{粒子移除支}（末态 $N-1$ 粒子，$\omega < 0$）。谱函数把"加入或移除一个动量为 $k$、内态为 $\alpha$ 的粒子"的全部激发能量与权重列出——它是单粒子运动的最一般刻画。
+
+\textbf{概念二：正则求和规则——谱权重总面积固定。}由正则反对易关系，
+\begin{equation}\label{eq:sumrule_spsf}
+\int\frac{d\omega}{2\pi}\,A_{\alpha\beta}(k,\omega) = \langle G|\{\hat{c}_{k,\alpha},\,\hat{c}^\dagger_{k,\beta}\}|G\rangle = \delta_{\alpha\beta}.
+\end{equation}
+相互作用只能在频谱\textbf{内部}重新分配权重（谱权重转移），不能改变总面积。
+
+\textbf{概念三：实验联系。}ARPES 的光电流 $I(k,\omega) \propto A(k,\omega)\,f(\omega)$（仅移除支可见），STS 测量的局域态密度是 $k$ 积分的对角谱函数；二者均直接读取 $A$ 的对角元 \cite{estakeRoy2025}。
+
+\textbf{概念四：无相互作用退化——本文的计算对象。}当系统无相互作用（或采用平均场/BdG 描述）时，式~\eqref{eq:lehmann_spsf} 的多体求和坍缩为单体哈密顿量 $\mathcal{H}(k)$ 的本征问题（坍缩过程的完整推导见附录~\ref{app:spsf_detail}）：
+\begin{equation}\label{eq:nonint}
+G^R(k,\omega) = \big[\omega + i0^+ - \mathcal{H}(k)\big]^{-1},
+\qquad
+A_{\alpha\beta}(k,\omega) = 2\pi\sum_n \langle\alpha|u_n(k)\rangle\langle u_n(k)|\beta\rangle\,\delta\big(\omega - E_n(k)\big),
+\end{equation}
+其中 $|u_n(k)\rangle$、$E_n(k)$ 为 $\mathcal{H}(k)$ 的本征矢与本征值。每条能带贡献一条 $\delta$ 线，\textbf{对角权重 = 本征矢在被分辨内态基上的投影模方}——谱函数的"形状"完全由本征矢的内态成分决定。这一结构将在小节~\ref{sec:spsf_form} 对一般二能级系统完全求解。
+
+\subsection{一般二能级系统中谱函数的一般形式}\label{sec:spsf_form}
+
+\textbf{模型与记号。}一般二能级系统的动量空间哈密顿量总可写为
+\begin{equation}\label{eq:H2level}
+\mathcal{H}(k) = d_0(k)\,\mathbb{1} + \mathbf{d}(k)\cdot\symbf{\sigma},
+\end{equation}
+其中 $\mathbf{d}(k) = (d_x,d_y,d_z)$ 为实周期函数，$\symbf{\sigma}$ 为 Pauli 矩阵。约定能隙不关闭：$r(k) \equiv |\mathbf{d}(k)| > 0$。本征值 $E_\pm(k) = d_0(k) \pm r(k)$；归一化 Bloch 矢量 $\hat{\mathbf{d}}(k) = \mathbf{d}(k)/r(k)$ 随 $k$ 在 Bloch 球面上描出闭曲线；内态基取 $|\alpha\rangle = (1,0)^T$（$\sigma_z = +1$）、$|\beta\rangle = (0,1)^T$。核心代数工具是\textbf{谱投影算符}
+\begin{equation}\label{eq:projector}
+P_\pm(k) \equiv \frac{1}{2}\Big[\mathbb{1} \pm \hat{\mathbf{d}}(k)\cdot\symbf{\sigma}\Big],
+\end{equation}
+它满足幂等、正交、完备且给出谱分解 $\mathcal{H}(k) = E_+(k)P_+(k) + E_-(k)P_-(k)$；关键结构性质：$P_\pm$ \textbf{只依赖方向 $\hat{\mathbf{d}}$，不依赖 $d_0$ 与 $r$}——这是"信号强度只看 Bloch 矢量方向、不看大小与能级平移"的代数根源。投影算符性质与球坐标本征矢的完整推导见附录~A。
+
+\textbf{谱表示。}由谱分解对 $(\omega + i0^+ - \mathcal{H})$ 求逆并代入 Sokhotski--Plemelj 公式 $\frac{1}{x+i0^+} = \mathcal{P}\frac{1}{x} - i\pi\delta(x)$（细节见附录~B），式~\eqref{eq:nonint} 化为
+\begin{equation}\label{eq:spsf_repr}
+A_{\alpha\beta}(k,\omega) = 2\pi\sum_{\pm}\langle\alpha|P_\pm(k)|\beta\rangle\,\delta\big(\omega - E_\pm(k)\big).
+\end{equation}
+
+\textbf{对角权重。}取被分辨内态 $|\alpha\rangle$（$\sigma_z = +1$）。因 $\langle\alpha|\sigma_{x,y}|\alpha\rangle = 0$、$\langle\alpha|\sigma_z|\alpha\rangle = 1$，即 $\langle\alpha|\symbf{\sigma}|\alpha\rangle = \hat{z}$：
+\begin{equation}\label{eq:weight_spsf}
+\langle\alpha|P_\pm|\alpha\rangle = \frac{1}{2}\Big[1 \pm \hat{\mathbf{d}}\cdot\hat{z}\Big] = \frac{1}{2}\left(1 \pm \frac{d_z}{r}\right) = \frac{1 \pm \cos\theta_k}{2} = \begin{cases}\cos^2\dfrac{\theta_k}{2} & (+)\\[6pt] \sin^2\dfrac{\theta_k}{2} & (-)\end{cases}
+\end{equation}
+其中 $\theta_k = \arccos\hat d_z(k)$ 为 $\hat{\mathbf{d}}(k)$ 的极角。
+
+\textbf{主结果。}
+\begin{equation}\label{eq:main_spsf}
+\boxed{\ A_{\alpha\alpha}(k,\omega) = \pi\left(1 + \frac{d_z(k)}{|\mathbf{d}(k)|}\right)\delta\big(\omega - E_+(k)\big) + \pi\left(1 - \frac{d_z(k)}{|\mathbf{d}(k)|}\right)\delta\big(\omega - E_-(k)\big)\ }
+\end{equation}
+即：\textbf{在 $\sigma_z = +1$ 的内态上，上带信号强度为 $\pi\,(1 + \hat d_z)$，下带信号强度为 $\pi\,(1 - \hat d_z)$}；在 $\sigma_z = -1$ 的内态 $\beta$ 上互补（$1 \mp \hat d_z$）。非对角元携带方位角 $\phi_k$：
+\begin{equation}\label{eq:nondiag}
+A_{\alpha\beta}(k,\omega) = \pi\,\sin\theta_k\,e^{-i\phi_k}\Big[\delta\big(\omega - E_+(k)\big) - \delta\big(\omega - E_-(k)\big)\Big].
+\end{equation}
+式~\eqref{eq:main_spsf} 的权重存在三条互相印证的推导路线（投影算符、显式本征矢、直接求逆加部分分式），完整代数见附录~B。
+
+\textbf{性质与解读。}
+\begin{itemize}
+\item \textbf{归一化与互补}：$\int\frac{d\omega}{2\pi}A_{\alpha\alpha} = \sum_\pm\frac{1}{2}(1\pm\hat d_z) = 1$，与求和规则~\eqref{eq:sumrule_spsf} 一致。
+\item \textbf{内态求和相消}：$\mathrm{Tr}\,P_\pm = 1$，故 $A_{\alpha\alpha} + A_{\beta\beta} = 2\pi\big[\delta(\omega-E_+) + \delta(\omega-E_-)\big]$——未分辨内态的总谱函数权重恒为 $1$，上下带权重调制 $1\pm\hat d_z$ \textbf{只存在于内态分辨测量中}。
+\item \textbf{物理含义}：$\frac{1}{2}(1\pm\hat d_z) = |\langle\alpha|u_\pm\rangle|^2$ 是上/下带本征态在子格 $\alpha$ 上的\textbf{极化份额}；对 BdG 系统，它是 Bogoliubov 准粒子的\textbf{粒子份额}（相干因子 $|X|^2,|Y|^2$）。
+\item \textbf{特例}：Estake--Roy 对 Kitaev 链（$\pi(1\pm\sin\tilde\theta)$）、长程 SSH 与 QWZ 模型（$\pi(1\pm\cos\Theta)$）的逐模型结果均为式~\eqref{eq:main_spsf} 的特例——$\sin\tilde\theta = \cos\Theta = \hat d_z$，区别只是极角参考轴的选取（对照表见附录~B）\cite{estakeRoy2025}。
+\end{itemize}
+
+\subsection{Bragg 谱的一般定义与概念}\label{sec:bragg_def}
+
+\textbf{定义。}Bragg 谱学用两束频率差为 $\omega$、波矢差为 $q$ 的激光耦合系统总密度 $\hat{\rho}(\mathbf{r}) = \sum_s \hat{\psi}^\dagger_s(\mathbf{r})\hat{\psi}_s(\mathbf{r})$（$s$ 遍历子格/内态），微扰为 $\hat{H}'(t) = V\,e^{i(\omega t - \mathbf{q}\cdot\mathbf{r})}\hat{\rho}_q + \mathrm{H.c.}$。晶格常数为 $a$、子格相对位移 $\delta_s$（$\delta_A = 0$，$\delta_B = \delta$）时，动量空间密度算符与\textbf{动力学结构因子}（零温、吸收侧 $\omega > 0$）为
+\begin{equation}\label{eq:rhoq_def}
+\hat{\rho}_q = \sum_k \hat{\psi}^\dagger_{k+q}\,\hat{F}(q)\,\hat{\psi}_k,\qquad
+\hat{F}(q) = \mathrm{diag}\big(1,\ e^{iq\delta}\big),
+\end{equation}
+\begin{equation}\label{eq:dsf_def}
+S(q,\omega) = \sum_f \big|\langle f|\hat{\rho}_q|G\rangle\big|^2\,\delta\big(\omega - (E_f - E_G)\big),
+\end{equation}
+其中 $\hat{\psi}_k = (\hat{c}_{k,A},\hat{c}_{k,B})^T$，$\hat F(q)$ 为\textbf{子格形状因子}（来自子格位置差的相位）。
+
+\textbf{概念一：$S$ 是密度激发谱（两体探针）。}由涨落--耗散定理，$S(q,\omega) = -\frac{1}{\pi}\frac{1}{1-e^{-\beta\omega}}\,\mathrm{Im}\,\chi^R(q,\omega)$，其中 $\chi^R(q,t) = -i\theta(t)\langle G|[\hat{\rho}_q(t),\hat{\rho}_{-q}(0)]|G\rangle$ 为密度响应函数（$\theta(t)$ 为式~\eqref{eq:heaviside} 的 Heaviside 阶跃函数，同样保证因果性；对易子取代反对易子反映密度是玻色型算符）；$T = 0$、$\omega > 0$ 时 $S = -\frac{1}{\pi}\mathrm{Im}\,\chi^R$。Bragg 实验的吸收率直接正比于 $S(q,\omega)$。与谱函数（单体算符、内态分辨）相对，$S$ 探测的是\textbf{总密度的两体关联}——实验上本来就不分辨内态。
+
+\textbf{概念二：求和规则。}静态结构因子 $S(q) = \int d\omega\,S(q,\omega)$ 给出等时密度--密度关联；$f$-求和规则把一阶频率矩 $\int d\omega\,\omega S(q,\omega)$ 与粒子质量（连续极限为 $Nq^2/2m$）或晶格动能联系起来——$S$ 的谱权重受严格约束，与谱函数的求和规则~\eqref{eq:sumrule_spsf} 地位相同。
+
+\textbf{概念三：分立跃迁极限——本文的计算对象。}当系统无相互作用且初态为玻色--爱因斯坦凝聚（BEC）或单粒子（全部粒子占据下带单一动量 $k_0$）时，式~\eqref{eq:dsf_def} 的多体求和坍缩为\textbf{有限条分立跃迁}：$\hat{\rho}_q$ 把 $(k_0,\text{下带})$ 的粒子移到 $(k_0+q,\ m\in\{+,-\})$ 的两个末态——谱由 $\delta$ 线组成，权重为跃迁矩阵元的模方。这一结构将在小节~\ref{sec:bragg_form} 对一般二能级系统完全求解。
+
+\subsection{一般二能级系统中 Bragg 谱的一般形式}\label{sec:bragg_form}
+
+\textbf{跃迁矩阵元。}变换到能带基 $\hat{c}_{k,s} = \sum_n U_{sn}(k)\,\hat{d}_{k,n}$（$U(k) = \big[|u_+(k)\rangle,\ |u_-(k)\rangle\big]$ 为本征矢矩阵），式~\eqref{eq:rhoq_def} 化为
+\begin{equation}\label{eq:bandbasis}
+\hat{\rho}_q = \sum_{k,m,n} M_{mn}(k,q)\;\hat{d}^\dagger_{k+q,m}\,\hat{d}_{k,n},
+\qquad
+M_{mn}(k,q) = \langle u_m(k+q)|\hat{F}(q)|u_n(k)\rangle.
+\end{equation}
+形状因子 $\hat F = \mathbb{1}$（$\delta = 0$）时 $M_{mn}(k,q) = \langle u_m(k+q)|u_n(k)\rangle$ 是\textbf{两个不同动量 Bloch 态的相干重叠}——拓扑信息最干净的极限，本小节主推导取此极限（$\delta\neq0$ 修正见附录~C）。
+
+\textbf{Lehmann 推导的逻辑。}初态 $|G\rangle = \frac{(\hat{d}^\dagger_{k_0,-})^N}{\sqrt{N!}}|\mathrm{vac}\rangle$。$\hat{\rho}_q$ 作用后（$\hat d_{k,n}|G\rangle = \sqrt{N}\,\delta_{k,k_0}\delta_{n,-}|G'\rangle$）：
+\begin{equation}\label{eq:action}
+\hat{\rho}_q|G\rangle = \sqrt{N}\sum_{m=\pm} M_{m,-}(k_0,q)\;\hat{d}^\dagger_{k_0+q,m}\,|G'\rangle \equiv \sqrt{N}\sum_{m=\pm} M_{m,-}(k_0,q)\,|f_m\rangle,
+\end{equation}
+末态 $|f_m\rangle$ 彼此正交，能量为 $E_m(k_0+q) - E_-(k_0)$。代入式~\eqref{eq:dsf_def} 即得两条 $\delta$ 线（完整过程见附录~C）：
+\begin{equation}\label{eq:bragg_two_lines}
+S(q,\omega) = N\Big[|M_{--}(k_0,q)|^2\,\delta\big(\omega - \omega_{\rm intra}(q)\big) + |M_{+-}(k_0,q)|^2\,\delta\big(\omega - \omega_{\rm inter}(q)\big)\Big],
+\end{equation}
+其中 $\omega_{\rm intra}(q) = E_-(k_0+q) - E_-(k_0)$（带内线，粒子留在下带），$\omega_{\rm inter}(q) = E_+(k_0+q) - E_-(k_0)$（带间线，粒子激发到上带）。
+
+\textbf{权重。}矩阵元模方的计算有两条等价路线（完整代数见附录~C）：显式代入球坐标本征矢化简，或用投影算符捷径——由 $\langle u_-(k)|\symbf{\sigma}|u_-(k)\rangle = -\hat{\mathbf{d}}(k)$（下带赝自旋反平行于 $\hat{\mathbf{d}}$）：
+\begin{equation}\label{eq:projector_shortcut}
+|M_{m,-}(k_0,q)|^2 = \langle u_-(k_0)|P_m(k_0+q)|u_-(k_0)\rangle
+= \frac{1}{2}\Big[1 - m\,\hat{\mathbf{d}}(k_0+q)\cdot\hat{\mathbf{d}}(k_0)\Big],
+\end{equation}
+$m = +1$ 为带间、$m = -1$ 为带内权重——\textbf{与谱函数的式~\eqref{eq:weight_spsf} 共用同一投影算符结构}。
+
+\textbf{主结果。}定义两个归一化 Bloch 矢量在 Bloch 球上的\textbf{测地角距} $\Theta(k_0,q) \in [0,\pi]$：
+\begin{equation}\label{eq:geodesic}
+\cos\Theta(k_0,q) \equiv \hat{\mathbf{d}}(k_0+q)\cdot\hat{\mathbf{d}}(k_0).
+\end{equation}
+则
+\begin{equation}\label{eq:main_bragg}
+\boxed{\ S(q,\omega) = N\Big[\,\underbrace{\textstyle\frac{1+\cos\Theta(k_0,q)}{2}}_{\text{带内线}}\,\delta\big(\omega - \omega_{\rm intra}(q)\big) + \underbrace{\textstyle\frac{1-\cos\Theta(k_0,q)}{2}}_{\text{带间线}}\,\delta\big(\omega - \omega_{\rm inter}(q)\big)\Big]\ }
+\end{equation}
+即\textbf{带内线强度 $= N\cos^2\frac{\Theta}{2}$，带间线强度 $= N\sin^2\frac{\Theta}{2}$}，且求和规则
+\begin{equation}\label{eq:sumrule_bragg}
+|M_{--}|^2 + |M_{+-}|^2 = 1\qquad\Longrightarrow\qquad I_{\rm intra} + I_{\rm inter} = N,
+\end{equation}
+粒子要么留在下带、要么跳到上带，无其他出路。
+
+\textbf{几何与物理解读。}
+\begin{itemize}
+\item \textbf{三层等价几何}：带间强度 $\sin^2\frac{\Theta}{2}$ = 测地角距半角的正弦平方 = 弦距平方 $\frac{1}{4}|\hat{\mathbf{d}}' - \hat{\mathbf{d}}|^2$ = Fubini--Study 距离的正弦平方（$d_{\rm FS} = \frac{\Theta}{2}$）。特例：$\Theta = 0$（两点重合）不激发；$\Theta = \pi$（\textbf{对跖点}）发生完全权重交换——带内线消失、带间线带走全部强度 $N$；$\Theta = \frac{\pi}{2}$ 各半。
+\item \textbf{规范性质}：Bloch 相位规范 $|u_n\rangle \to e^{i\varphi_n}|u_n\rangle$ 下 $M_{mn} \to e^{-i\varphi_m(k+q)}e^{i\varphi_n(k)}M_{mn}$，模方不变——强度是规范不变量；矩阵元的\textbf{相位}则是规范协变的，小 $q$ 极限下给出 Berry 联络（附录~C）。
+\item \textbf{与谱函数的统一结构}：式~\eqref{eq:main_spsf} 与~\eqref{eq:main_bragg} 的权重是同一"量子距离"公式 $w = \frac{1}{2}(1 \mp \hat{\mathbf{a}}\cdot\hat{\mathbf{b}})$ 的两种投影——谱函数取 $(\hat{\mathbf{a}},\hat{\mathbf{b}}) = (\hat{\mathbf{d}}(k),\ \hat{z})$，即轨迹上的点到\textbf{固定外部轴}（被分辨内态）的距离；Bragg 取 $(\hat{\mathbf{a}},\hat{\mathbf{b}}) = (\hat{\mathbf{d}}(k_0+q),\ \hat{\mathbf{d}}(k_0))$，即\textbf{轨迹自身上两点间}的距离。
+\item \textbf{拓扑含义（简述）}：绕数、Chern 数等拓扑不变量是 Bloch 闭曲线自身的内蕴性质。对手性对称一维系统（$\hat{\mathbf{d}}$ 限制在赤道），绕数 $\nu \neq 0$ 保证轨迹必经过初态的对跖点 $-\hat{\mathbf{d}}(k_0)$，于是带间线必然在某 $q^*$ 达到满强度 $N$；权重比 $R(q) = I_{\rm inter}/I_{\rm intra} = \tan^2\frac{\Theta}{2}$ 的发散次数等于 $\nu$——这是 Bragg 谱自归一（无需绝对强度校准）的拓扑判据。谱函数的对应判据（强度穿越 $\pi$）则依赖分辨轴与对称轴的相对取向。
+\end{itemize}
+
+\subsection{模型实例：Kitaev 链与 false-positive 变体的哈密顿量}\label{sec:models}
+
+数值代码（Bloch 球轨迹、$\theta_k$、$\Theta(k,k_0)$ 与两种谱强度面板）所用的一维模型均取自 Estake--Roy \cite{estakeRoy2025}：Kitaev 链的 BdG 形式（其 Eq.~(9)）及其 false-positive 修改版。二者都是式~\eqref{eq:H2level} 中 $d_0 = 0$、$d_x = 0$ 的\textbf{手性}二能带系统（手性算符 $\Gamma = \sigma_x$，满足 $\Gamma\,\mathcal{H}(k)\,\Gamma^{-1} = -\mathcal{H}(k)$），故泡利展开只含 $\sigma_y$、$\sigma_z$ 两项；二能级矩阵形式由标准映射
+\begin{equation}\label{eq:matrix_form}
+\mathbf{d}(k)\cdot\symbf{\sigma} = \begin{pmatrix} d_z(k) & d_x(k) - i\,d_y(k)\\ d_x(k) + i\,d_y(k) & -d_z(k) \end{pmatrix}
+\end{equation}
+给出，轨迹限制在 $d_y$--$d_z$ 平面内，绕数 $\nu$ 即该平面闭曲线包围原点的次数。
+
+\textbf{Kitaev 链（BdG/Nambu 基 $(\hat{c}_k,\ \hat{c}^\dagger_{-k})^T$）。}Bloch 矢量取
+\begin{equation}\label{eq:kitaev_d}
+\mathbf{d}(k) = \Big(0,\ \Delta\sin k,\ -\frac{\mu}{2} - J\cos k\Big),
+\end{equation}
+泡利矩阵展开式为
+\begin{equation}\label{eq:kitaev_pauli}
+\mathcal{H}_{\rm K}(k) = \Delta\sin k\;\sigma_y - \Big(\frac{\mu}{2} + J\cos k\Big)\,\sigma_z,
+\end{equation}
+对应的二能级矩阵形式（$d_x = 0$，非对角元 $\mp i\,d_y$）
+\begin{equation}\label{eq:kitaev_matrix}
+\mathcal{H}_{\rm K}(k) =
+\begin{pmatrix}
+-\dfrac{\mu}{2} - J\cos k & -i\,\Delta\sin k\\[8pt]
+i\,\Delta\sin k & \dfrac{\mu}{2} + J\cos k
+\end{pmatrix}.
+\end{equation}
+代码取 $J = \Delta = 1$，本征值 $E_\pm(k) = \pm\sqrt{\Delta^2\sin^2 k + \big(\frac{\mu}{2} + J\cos k\big)^2}$。$\big(d_y(k),\,d_z(k)\big)$ 是以 $(0,\,-\mu/2)$ 为中心、半轴为 $(\Delta,\,J)$ 的椭圆：当且仅当 $|\mu| < 2J$ 时包围原点，故 $\mu = 1$（$\mu < 2J$）为拓扑相 $\nu = 1$——$\hat{\mathbf{d}}$ 沿 $d_y$--$d_z$ 大圆缠绕一周、扫过 $\hat d_z \gtrless 0$ 两个极区；$\mu = 3$（$\mu > 2J$）为平凡相 $\nu = 0$——$\hat{\mathbf{d}}$ 局限于 $d_z < 0$；$|\mu| = 2J$ 处 $k = 0$ 或 $\pi$ 上能隙关闭。被分辨内态轴为 Nambu 粒子轴（$\sigma_z = +1$），故 $\sin\tilde\theta_k = \hat d_z(k)$、强度 $\pi(1\pm\hat d_z)$（附录~B 特例恢复表）。
+
+\textbf{False-positive 变体。}仅把 $d_y$ 分量的 $\sin k$ 换成 $\cos k$（Estake--Roy false-positive 构造的一维类比，系统数值研究见 \texttt{Kitaev\_dy2cosk\_FalsePositive}）：
+\begin{equation}\label{eq:fp_d}
+\mathbf{d}_{\rm fp}(k) = \Big(0,\ \Delta\cos k,\ -\frac{\mu}{2} - J\cos k\Big),
+\end{equation}
+泡利矩阵展开式与二能级矩阵形式为
+\begin{equation}\label{eq:fp_pauli}
+\mathcal{H}_{\rm fp}(k) = \Delta\cos k\;\sigma_y - \Big(\frac{\mu}{2} + J\cos k\Big)\,\sigma_z,
+\end{equation}
+\begin{equation}\label{eq:fp_matrix}
+\mathcal{H}_{\rm fp}(k) =
+\begin{pmatrix}
+-\dfrac{\mu}{2} - J\cos k & -i\,\Delta\cos k\\[8pt]
+i\,\Delta\cos k & \dfrac{\mu}{2} + J\cos k
+\end{pmatrix}.
+\end{equation}
+此时 $d_y$、$d_z$ 都只通过 $t \equiv \cos k \in [-1,1]$ 依赖动量：$\big(d_y,\,d_z\big) = \big(\Delta t,\ -\tfrac{\mu}{2} - Jt\big)$ 是 $d_y$--$d_z$ 平面上的一条\textbf{直线段}，且 $t$ 走完 $[-1,1]$ 后沿原路返回（$\mathbf{d}_{\rm fp}(-k) = \mathbf{d}_{\rm fp}(k)$）——退化闭曲线不可能包围原点，故对一切 $\mu \neq 0$ 都有 $\nu \equiv 0$；能隙关闭点由 $|\mu| = 2J$ 移至 $\mu = 0$、$k = \pm\pi/2$（线段穿过原点处），且沿 $(J,\Delta)\to(0,\Delta)\to(0,0)$ 的绝热形变全程有隙，系统可连续退到原子极限。严格地说，$d_y = \Delta\cos k$ 对应\textbf{对称}的近邻配对块，为 Fermi 统计所禁戒，该矩阵宜读作具有同一 $\mathcal{H}(k)$ 的双轨道手性导线——不影响下述谱学结论。
+
+假阳性的机制：$d_z(k) = -\tfrac{\mu}{2} - J\cos k$ 与原模型\textbf{逐点相同}。$0 < |\mu| < 2J$（代码取 $\mu = 1$）时 $d_z$ 仍在 $k = \pm\arccos(-\mu/2J) = \pm 2\pi/3$ 处变号，由式~\eqref{eq:main_spsf}，谱函数强度 $\pi(1\pm\hat d_z)$ 的 $\pi$ 穿越位置与每带 2 次的计数同 $\nu = 1$ 的 Kitaev 链完全一致——\textbf{对角谱函数判据给出假阳性}（false positive）。但轨迹的整体像变了：$\hat{\mathbf{d}}$ 的像不再是完整大圆，而是其上一段跨度 $<\pi$ 的\textbf{圆弧}（端点 $k = 0$ 与 $k = \pm\pi$），只触及\textbf{南极}（$k = \pm\pi/2$ 处 $d_y = 0$、$\hat{\mathbf{d}} = -\hat z$），不再到达北极，$\theta_k$ 值域较 $\nu = 1$ 链的 $[0,\pi]$ 收缩为 $[63^\circ,\pi]$（$J = \Delta = 1$、$\mu = 1$）。相应地，从 $k_0 = 0$ 出发的测地角上界为 $\Theta_{\max} = \arccos\big[\hat{\mathbf{d}}(\pm\pi)\cdot\hat{\mathbf{d}}(0)\big] \approx 150^\circ < \pi$，由式~\eqref{eq:main_bragg}，Bragg 带间线最大强度 $\tfrac{1-\cos\Theta_{\max}}{2} \approx 0.93 < 1$——\textbf{对跖点不可达}，满强度转移判据不会被误触发。两种强度型探针由此分道扬镳：固定轴投影的谱函数只看到 $\hat d_z(k)$，可被直线段退化路径逐点欺骗；而依赖轨迹整体像的 Bragg 对跖点判据（$W_{\max}(k_0) < 1$ 对一切 $k_0$ 成立）把该假阳性分辨出来。更一般地，两种强度信号都是带符号大圆角度的余弦——$\pi(1\pm\cos\Phi(k))$ 与 $\tfrac{N}{2}(1\pm\cos(\Phi(k)-\Phi(k_0)))$——$\cos$ 的偶性使轨迹的取向与绕数符号对一切强度量不可见：上例 Bragg 之所以能分辨，既因参考点 $k_0=0$ 离开了折叠轴（$d_y(0)=\Delta\neq0$，非极点），且其读到的是\textbf{像的退化}而非绕数本身；一旦参考点落在极点（如 Kitaev 链天然 BEC 点 $k_0=0$ 处 $d_y(0)=0$），Bragg 权重逐点退化为 $\tfrac{1}{2}(1\pm\hat d_z)$，与谱函数完全同盲。retraced/winding 对偶的不可分辨性、绕数符号盲区与"像 $\neq$ 绕数"的系统确证见配套笔记 \texttt{cos\_even\_blindness}（数值脚本 \texttt{codes/verify\_even\_blindness.py}，图件 \texttt{fig/even\_blindness.pdf}）。
+
+\appendix
+%%%%%%%%% A %%%%%%%
+\section{二能级系统的 Bloch 球表示与谱投影算符}\label{app:prelim}
+
+\textbf{Pauli 代数恒等式。}$\sigma_i\sigma_j = \delta_{ij}\mathbb{1} + i\epsilon_{ijk}\sigma_k$，故对任意 $\mathbf{a},\mathbf{b}$：
+\begin{equation}\label{eq:pauli}
+\text{(P)}\qquad (\mathbf{a}\cdot\symbf{\sigma})(\mathbf{b}\cdot\symbf{\sigma}) = (\mathbf{a}\cdot\mathbf{b})\,\mathbb{1} + i\,(\mathbf{a}\times\mathbf{b})\cdot\symbf{\sigma}.
+\end{equation}
+两个直接推论（取 $\mathbf{a} = \mathbf{b} = \hat{\mathbf{d}}$ 与 $\mathbf{a} = \mathbf{d},\ \mathbf{b} = \hat{\mathbf{d}}$）：
+\begin{equation}
+\text{(P1)}\quad (\hat{\mathbf{d}}\cdot\symbf{\sigma})^2 = \mathbb{1};\qquad
+\text{(P2)}\quad (\mathbf{d}\cdot\symbf{\sigma})(\hat{\mathbf{d}}\cdot\symbf{\sigma}) = r\,\mathbb{1}.
+\end{equation}
+
+\textbf{投影算符的性质。}对 $P_\pm = \frac{1}{2}[\mathbb{1} \pm \hat{\mathbf{d}}\cdot\symbf{\sigma}]$：
+\begin{itemize}
+\item (i) 幂等：$P_\pm^2 = \frac{1}{4}\big[\mathbb{1} \pm 2\hat{\mathbf{d}}\cdot\symbf{\sigma} + (\hat{\mathbf{d}}\cdot\symbf{\sigma})^2\big] \stackrel{\text{(P1)}}{=} \frac{1}{2}\big[\mathbb{1} \pm \hat{\mathbf{d}}\cdot\symbf{\sigma}\big] = P_\pm$；
+\item (ii) 正交：$P_+P_- = \frac{1}{4}\big[\mathbb{1} - (\hat{\mathbf{d}}\cdot\symbf{\sigma})^2\big] \stackrel{\text{(P1)}}{=} 0$；
+\item (iii) 完备：$P_+ + P_- = \mathbb{1}$，故 $\mathrm{Tr}\,P_\pm = 1$；
+\item (iv) 本征：$\mathcal{H}P_\pm = d_0P_\pm + \frac{r}{2}\big[\hat{\mathbf{d}}\cdot\symbf{\sigma} \pm \mathbb{1}\big] \stackrel{\text{(P2)}}{=} (d_0 \pm r)P_\pm = E_\pm P_\pm$。
+\end{itemize}
+由 (iii)(iv) 得谱分解 $\mathcal{H} = E_+P_+ + E_-P_-$；$P_\pm$ 只依赖 $\hat{\mathbf{d}}$，不依赖 $d_0$ 与 $r$。$\blacksquare$
+
+\textbf{球坐标本征矢。}设 $\hat{\mathbf{d}}(k) = (\sin\theta_k\cos\phi_k,\ \sin\theta_k\sin\phi_k,\ \cos\theta_k)$，取规范
+\begin{equation}\label{eq:eigenstates}
+|u_+(k)\rangle = \begin{pmatrix} \cos\dfrac{\theta_k}{2} \\[6pt] e^{i\phi_k}\sin\dfrac{\theta_k}{2} \end{pmatrix},\qquad
+|u_-(k)\rangle = \begin{pmatrix} -e^{-i\phi_k}\sin\dfrac{\theta_k}{2} \\[6pt] \cos\dfrac{\theta_k}{2} \end{pmatrix}.
+\end{equation}
+验证：显式地
+$$\mathbf{d}\cdot\symbf{\sigma} = \begin{pmatrix} d_z & d_x - id_y \\ d_x + id_y & -d_z \end{pmatrix} = r\begin{pmatrix} \cos\theta & \sin\theta\,e^{-i\phi} \\ \sin\theta\,e^{i\phi} & -\cos\theta \end{pmatrix},$$
+$$\mathbf{d}\cdot\symbf{\sigma}|u_+\rangle = r\begin{pmatrix} \cos\theta\cos\frac{\theta}{2} + \sin\theta\sin\frac{\theta}{2} \\ e^{i\phi}\big(\sin\theta\cos\frac{\theta}{2} - \cos\theta\sin\frac{\theta}{2}\big) \end{pmatrix} = r\begin{pmatrix} \cos\frac{\theta}{2} \\ e^{i\phi}\sin\frac{\theta}{2} \end{pmatrix} = r|u_+\rangle,$$
+（末步用和角公式 $\cos\theta\cos\frac{\theta}{2} + \sin\theta\sin\frac{\theta}{2} = \cos\frac{\theta}{2}$ 等）；同理 $\mathbf{d}\cdot\symbf{\sigma}|u_-\rangle = -r|u_-\rangle$。正交归一：$\langle u_\pm|u_\pm\rangle = 1$，$\langle u_+|u_-\rangle = -\cos\frac{\theta}{2}e^{-i\phi}\sin\frac{\theta}{2} + e^{i\phi}\sin\frac{\theta}{2}\cos\frac{\theta}{2} = 0$。物理含义：$|u_\pm\rangle$ 是赝自旋沿 $\pm\hat{\mathbf{d}}$ 方向的自旋态；下带态的赝自旋指向对跖点 $-\hat{\mathbf{d}}$，由此立得 $\langle u_-|\sigma_a|u_-\rangle = -\hat d_a$（用 $\mathrm{Tr}\,\sigma_a = 0$、$\mathrm{Tr}\,\sigma_a\sigma_b = 2\delta_{ab}$：$\langle u_-|\sigma_a|u_-\rangle = \mathrm{Tr}[\sigma_aP_-] = -\hat d_a$）。$\blacksquare$
+
+%%%%%%%%% B %%%%%%%
+\section{谱函数一般形式的推导细节}\label{app:spsf_detail}
+
+\textbf{从 $G^R(k,t)$ 到 $A(k,\omega)$：Lehmann 表示的一般推导。}设多体哈密顿量 $\hat{H}$ 具有完备正交本征态系 $\hat{H}|n\rangle = E_n|n\rangle$（含基态 $|G\rangle$，能量 $E_G$），$\hbar = 1$；Heisenberg 算符 $\hat{c}_{k,\alpha}(t) = e^{i\hat{H}t}\,\hat{c}_{k,\alpha}\,e^{-i\hat{H}t}$。
+
+\textbf{第一步：拆开反对易式并插入完备基。}由定义式~\eqref{eq:green_def}，
+\begin{equation}
+G^R_{\alpha\beta}(k,t) = -i\,\theta(t)\sum_n\Big[\langle G|\hat{c}_{k,\alpha}(t)|n\rangle\langle n|\hat{c}^\dagger_{k,\beta}|G\rangle + \langle G|\hat{c}^\dagger_{k,\beta}|n\rangle\langle n|\hat{c}_{k,\alpha}(t)|G\rangle\Big],
+\end{equation}
+其中对每项分别插入 $\sum_n|n\rangle\langle n| = \mathbb{1}$。
+
+\textbf{第二步：Heisenberg 演化给出相位。}利用 $\hat{H}|n\rangle = E_n|n\rangle$ 与 $\langle G|\hat{H} = E_G\langle G|$：
+\begin{equation}
+\langle G|\hat{c}_{k,\alpha}(t)|n\rangle = \langle G|e^{i\hat{H}t}\,\hat{c}_{k,\alpha}\,e^{-i\hat{H}t}|n\rangle = e^{iE_G t}\,e^{-iE_n t}\,\langle G|\hat{c}_{k,\alpha}|n\rangle = e^{-i\Omega_n t}\,\langle G|\hat{c}_{k,\alpha}|n\rangle,
+\end{equation}
+\begin{equation}
+\langle n|\hat{c}_{k,\alpha}(t)|G\rangle = e^{+i\Omega_n t}\,\langle n|\hat{c}_{k,\alpha}|G\rangle,\qquad \Omega_n \equiv E_n - E_G.
+\end{equation}
+于是得到\textbf{时域 Lehmann 形式}：
+\begin{equation}\label{eq:time_lehmann}
+G^R_{\alpha\beta}(k,t) = -i\,\theta(t)\sum_n\Big[M^{(-)}_{\alpha\beta,n}(k)\,e^{-i\Omega_n t} + M^{(+)}_{\alpha\beta,n}(k)\,e^{+i\Omega_n t}\Big],
+\end{equation}
+\begin{equation}
+M^{(-)}_{\alpha\beta,n} \equiv \langle G|\hat{c}_{k,\alpha}|n\rangle\langle n|\hat{c}^\dagger_{k,\beta}|G\rangle,\qquad
+M^{(+)}_{\alpha\beta,n} \equiv \langle G|\hat{c}^\dagger_{k,\beta}|n\rangle\langle n|\hat{c}_{k,\alpha}|G\rangle.
+\end{equation}
+
+\textbf{第三步：Fourier 变换与收敛因子。}定义 $G^R(k,\omega) = \int_{-\infty}^{\infty}dt\,e^{i\omega t}\,G^R(k,t)$。$\theta(t)$ 把积分限制到 $t > 0$，但被积函数 $e^{i(\omega\mp\Omega_n)t}$ 不衰减，积分须按分布意义定义——对推迟函数，标准做法是换 $\omega \to \omega + i0^+$，等价于给被积函数乘衰减因子 $e^{-0^+ t}$（对应 $G^R(z)$ 在上半复平面解析）。基本积分：
+\begin{equation}\label{eq:fourier_integral}
+\int_0^{\infty}dt\,e^{i(\omega - \Omega + i0^+)t} = \left[\frac{e^{i(\omega-\Omega+i0^+)t}}{i(\omega-\Omega+i0^+)}\right]_0^{\infty} = 0 - \frac{1}{i(\omega-\Omega+i0^+)} = \frac{i}{\omega-\Omega+i0^+},
+\end{equation}
+上限处 $e^{i(\omega-\Omega)t}\,e^{-0^+\cdot\infty} \to 0$。
+
+\textbf{第四步：组装得频域 Lehmann 表示。}注意到 $(-i)\times i = 1$，对式~\eqref{eq:time_lehmann} 逐项应用式~\eqref{eq:fourier_integral}：
+\begin{equation}\label{eq:freq_lehmann}
+G^R_{\alpha\beta}(k,\omega) = \sum_n\left[\frac{M^{(-)}_{\alpha\beta,n}}{\omega - \Omega_n + i0^+} + \frac{M^{(+)}_{\alpha\beta,n}}{\omega + \Omega_n + i0^+}\right].
+\end{equation}
+全部极点位于下半平面 $\omega = \mp\Omega_n - i0^+$——这正是"推迟"函数解析结构的直接体现。
+
+\textbf{第五步：Sokhotski--Plemelj 公式取虚部得谱函数。}由 $\frac{1}{x+i0^+} = \mathcal{P}\frac{1}{x} - i\pi\delta(x)$，主值部分为实数、不贡献虚部：
+\begin{equation}
+A_{\alpha\beta}(k,\omega) = -2\,\mathrm{Im}\,G^R_{\alpha\beta}(k,\omega) = 2\pi\sum_n\Big[M^{(-)}_{\alpha\beta,n}\,\delta\big(\omega-\Omega_n\big) + M^{(+)}_{\alpha\beta,n}\,\delta\big(\omega+\Omega_n\big)\Big],
+\end{equation}
+即正文的式~\eqref{eq:lehmann_spsf}：$M^{(-)}$ 项为\textbf{粒子添加支}（$|n\rangle$ 含 $N+1$ 个粒子，$\omega > 0$），$M^{(+)}$ 项为\textbf{粒子移除支}（$N-1$ 个粒子，$\omega < 0$）。$\blacksquare$
+
+\textbf{特化：无相互作用系统给出式~\eqref{eq:nonint}。}取数守恒的无相互作用哈密顿量 $\hat{H} = \sum_k \hat{\psi}^\dagger_k\,\mathcal{H}(k)\,\hat{\psi}_k$，零温基态为下带填满。内态基与能带基算符的关系为 $\hat{c}_{k,s} = \sum_m U_{sm}(k)\,\hat{d}_{k,m}$（$U_{sm} = \langle s|u_m(k)\rangle$，$m=\pm$ 为能带指标）。式~\eqref{eq:freq_lehmann} 的多体求和中只有两个末态非零：
+\begin{itemize}
+\item \textbf{添加支}：$\hat{c}^\dagger_{k,\beta}|G\rangle = \sum_m\langle u_m|\beta\rangle\,\hat{d}^\dagger_{k,m}|G\rangle$，Pauli 原理使 $\hat{d}^\dagger_{k,-}|G\rangle = 0$（下带已满），唯一末态 $|n\rangle = \hat{d}^\dagger_{k,+}|G\rangle$，能量差 $\Omega_n = E_+(k)$，权重 $M^{(-)} = \langle\alpha|u_+\rangle\langle u_+|\beta\rangle$；
+\item \textbf{移除支}：$\hat{c}_{k,\alpha}|G\rangle = \sum_m\langle\alpha|u_m\rangle\,\hat{d}_{k,m}|G\rangle$，$\hat{d}_{k,+}|G\rangle = 0$（上带全空），唯一末态 $|n\rangle = \hat{d}_{k,-}|G\rangle$，能量差 $\Omega_n = -E_-(k)$（移除能量为 $E_-(k)$ 的粒子），故分母 $\omega + \Omega_n = \omega - E_-(k)$，权重 $M^{(+)} = \langle u_-|\beta\rangle\langle\alpha|u_-\rangle = \langle\alpha|u_-\rangle\langle u_-|\beta\rangle$。
+\end{itemize}
+两项合并：
+\begin{equation}
+G^R_{\alpha\beta}(k,\omega) = \sum_{m=\pm}\frac{\langle\alpha|u_m(k)\rangle\langle u_m(k)|\beta\rangle}{\omega - E_m(k) + i0^+}
+= \sum_m \langle\alpha|\,\frac{|u_m\rangle\langle u_m|}{\omega - E_m + i0^+}\,|\beta\rangle
+= \big[\omega + i0^+ - \mathcal{H}(k)\big]^{-1}_{\alpha\beta},
+\end{equation}
+末步用了 $\mathcal{H}(k) = \sum_m E_m|u_m\rangle\langle u_m|$ 的谱分解与预解式恒等式 $\frac{1}{\omega-\mathcal{H}} = \sum_m\frac{|u_m\rangle\langle u_m|}{\omega - E_m}$。代入 $A = -2\,\mathrm{Im}\,G^R$ 并用 Sokhotski--Plemelj 即得式~\eqref{eq:nonint}。对 BdG 超导（如 Kitaev 链）：Nambu 基下的单体 BdG 哈密顿量直接充当 $\mathcal{H}(k)$，添加/移除两支由粒子--空穴对称自动配对，同一公式成立——Estake--Roy 的推导正处在此框架中 \cite{estakeRoy2025}。$\blacksquare$
+
+\textbf{二能级系统的谱表示（投影算符路线）。}由谱分解 $\mathcal{H} = E_+P_+ + E_-P_-$ 与 (iii)，$(\omega + i0^+ - \mathcal{H})\sum_\pm \frac{P_\pm}{\omega - E_\pm + i0^+} = \sum_\pm P_\pm = \mathbb{1}$，故 $G^R(k,\omega) = \sum_\pm \frac{P_\pm}{\omega - E_\pm + i0^+}$。代入 Sokhotski--Plemelj 公式即得式~\eqref{eq:spsf_repr}。$\blacksquare$
+
+\textbf{路线 A（投影算符）。}即正文的式~\eqref{eq:weight_spsf}：$\langle\alpha|P_\pm|\alpha\rangle = \frac{1}{2}\big[1 \pm \hat{\mathbf{d}}\cdot\langle\alpha|\symbf{\sigma}|\alpha\rangle\big] = \frac{1}{2}(1\pm\hat d_z)$。非对角元：$\langle\alpha|\symbf{\sigma}|\beta\rangle = (1,\ -i,\ 0)$，故 $\langle\alpha|P_\pm|\beta\rangle = \pm\frac{1}{2}(\hat d_x - i\hat d_y) = \pm\frac{1}{2}\sin\theta_k\,e^{-i\phi_k}$，给出式~\eqref{eq:nondiag}。
+
+\textbf{路线 B（显式本征矢）。}由式~\eqref{eq:eigenstates} 直接读出第一个分量的模方：
+$$|\langle\alpha|u_+(k)\rangle|^2 = \cos^2\frac{\theta_k}{2} = \frac{1+\hat d_z}{2},\qquad
+|\langle\alpha|u_-(k)\rangle|^2 = \sin^2\frac{\theta_k}{2} = \frac{1-\hat d_z}{2},$$
+与路线 A 一致。
+
+\textbf{路线 C（直接求逆 + 部分分式；BdG/Kitaev 路线）。}由 (P) 的特例 $[\varepsilon\,\mathbb{1} - \mathbf{d}\cdot\symbf{\sigma}][\varepsilon\,\mathbb{1} + \mathbf{d}\cdot\symbf{\sigma}] = (\varepsilon^2 - r^2)\mathbb{1}$：
+$$\big[\omega - \mathcal{H}\big]^{-1} = \frac{(\omega - d_0)\,\mathbb{1} + \mathbf{d}\cdot\symbf{\sigma}}{(\omega - d_0)^2 - r^2},\qquad
+G^R_{\alpha\alpha} = \frac{\varepsilon + d_z}{\varepsilon^2 - r^2}\ \ (\varepsilon \equiv \omega - d_0).$$
+部分分式 $\frac{\varepsilon + d_z}{\varepsilon^2 - r^2} = \frac{A}{\varepsilon - r} + \frac{B}{\varepsilon + r}$，比较系数 $A + B = 1$、$r(A - B) = d_z$：
+$$A = \frac{1 + d_z/r}{2}\ (\text{极点 }\omega = E_+),\qquad B = \frac{1 - d_z/r}{2}\ (\text{极点 }\omega = E_-),$$
+留数即 $\delta$ 峰权重。Estake--Roy 对 Kitaev 链的 BdG 推导（相干因子 $|X|^2 = \frac{1+\sin\tilde\theta}{2}$、$|Y|^2 = \frac{1-\sin\tilde\theta}{2}$）正是本路线在 Nambu 基下的特例 \cite{estakeRoy2025}。$\blacksquare$
+
+\textbf{特例恢复表。}式~\eqref{eq:main_spsf} 中唯一的模型依赖量是被分辨的内态轴（Pauli 展开基中实验分辨的方向）：
+\begin{center}
+\renewcommand\arraystretch{1.4}
+\begin{tabular}{c|ccc}
+\hline
+模型 & 被分辨轴 & 论文记号 & 恢复的公式 \\
+\hline
+Kitaev 链 (BdG) & Nambu 粒子轴 & $\sin\tilde\theta = \hat d_z$（$\tilde\theta$ 从 $d_y$ 轴量起） & $\pi(1\pm\sin\tilde\theta)$ \\
+长程 SSH & 子格 $\alpha$（破缺手征，$d_z\neq0$） & $\cos\Theta = \hat d_z$（$\Theta$ 从 $d_z$ 轴量起） & $\pi(1\pm\cos\Theta)$ \\
+QWZ & 子格/自旋 $\alpha$ & $\cos\Theta = \hat d_z$ & $\pi(1\pm\cos\Theta)$ \\
+\hline
+\end{tabular}
+\end{center}
+$\tilde\theta$ 与 $\Theta$ 只是极角参考轴的记号差异：$\sin\tilde\theta = \cos\Theta = \hat d_z$。
+
+%%%%%%%%% C %%%%%%%
+\section{Bragg 谱一般形式的推导细节}\label{app:bragg_detail}
+
+\textbf{能带基变换。}$\hat{\rho}_q = \sum_k \hat{\psi}^\dagger_{k+q}\hat F(q)\hat\psi_k$ 中代入 $\hat\psi_k = U(k)\hat d_k$（$\hat d_k = (\hat d_{k,+},\hat d_{k,-})^T$）：
+$$\hat{\rho}_q = \sum_k \hat{d}^\dagger_{k+q}\,U^\dagger(k+q)\,\hat F(q)\,U(k)\,\hat d_k
+= \sum_{k,m,n} M_{mn}(k,q)\,\hat{d}^\dagger_{k+q,m}\,\hat{d}_{k,n},$$
+$$M_{mn}(k,q) = \sum_s U^*_{sm}(k+q)\,F_s(q)\,U_{sn}(k) = \langle u_m(k+q)|\hat{F}(q)|u_n(k)\rangle.$$
+
+\textbf{Lehmann 步骤。}（1）$\hat{d}_{k,n}|G\rangle = \sqrt{N}\,\delta_{k,k_0}\,\delta_{n,-}\,|G'\rangle$，$|G'\rangle = \frac{(\hat d^\dagger_{k_0,-})^{N-1}}{\sqrt{(N-1)!}}|\mathrm{vac}\rangle$；（2）代入上式得式~\eqref{eq:action}；（3）末态 $|f_m\rangle = \hat d^\dagger_{k_0+q,m}|G'\rangle$ 的能量 $E_{f_m} - E_G = E_m(k_0+q) + (N-1)E_-(k_0) - NE_-(k_0) = E_m(k_0+q) - E_-(k_0)$；（4）代入式~\eqref{eq:dsf_def}，正交性 $\langle f_m|f_{m'}\rangle = \delta_{mm'}$（$m\neq m'$ 时 $\langle u_m(k_0+q)|u_{m'}(k_0+q)\rangle = 0$）保证无交叉项，得式~\eqref{eq:bragg_two_lines}。$\blacksquare$
+
+\textbf{矩阵元的显式代数。}记 $\theta \equiv \theta_{k_0}$，$\phi \equiv \phi_{k_0}$，$\theta' \equiv \theta_{k_0+q}$，$\phi' \equiv \phi_{k_0+q}$。由式~\eqref{eq:eigenstates}：
+$$M_{--} = \langle u_-(k_0+q)|u_-(k_0)\rangle = e^{i(\phi'-\phi)}\sin\tfrac{\theta'}{2}\sin\tfrac{\theta}{2} + \cos\tfrac{\theta'}{2}\cos\tfrac{\theta}{2},$$
+$$|M_{--}|^2 = \sin^2\tfrac{\theta'}{2}\sin^2\tfrac{\theta}{2} + \cos^2\tfrac{\theta'}{2}\cos^2\tfrac{\theta}{2} + 2\sin\tfrac{\theta'}{2}\sin\tfrac{\theta}{2}\cos\tfrac{\theta'}{2}\cos\tfrac{\theta}{2}\cos(\phi'-\phi).$$
+用倍角公式 $\sin^2\frac{x}{2} = \frac{1-\cos x}{2}$、$\cos^2\frac{x}{2} = \frac{1+\cos x}{2}$ 与 $\sin\frac{\theta'}{2}\cos\frac{\theta'}{2} = \frac{\sin\theta'}{2}$：
+$$|M_{--}|^2 = \frac{(1-\cos\theta')(1-\cos\theta) + (1+\cos\theta')(1+\cos\theta)}{4} + \frac{\sin\theta\sin\theta'\cos(\phi'-\phi)}{2},$$
+分子展开后 $\pm\cos\theta$、$\pm\cos\theta'$ 交叉项相消，得
+$$|M_{--}|^2 = \frac{1 + \big[\cos\theta\cos\theta' + \sin\theta\sin\theta'\cos(\phi-\phi')\big]}{2} = \frac{1 + \hat{\mathbf{d}}(k_0)\cdot\hat{\mathbf{d}}(k_0+q)}{2},$$
+末步用球坐标点积公式。同理
+$$M_{+-} = \langle u_+(k_0+q)|u_-(k_0)\rangle = -\cos\tfrac{\theta'}{2}\,e^{-i\phi}\sin\tfrac{\theta}{2} + e^{-i\phi'}\sin\tfrac{\theta'}{2}\cos\tfrac{\theta}{2},$$
+$$|M_{+-}|^2 = \frac{(1+\cos\theta')(1-\cos\theta) + (1-\cos\theta')(1+\cos\theta)}{4} - \frac{\sin\theta\sin\theta'\cos(\phi'-\phi)}{2} = \frac{1 - \hat{\mathbf{d}}(k_0)\cdot\hat{\mathbf{d}}(k_0+q)}{2}.$$
+
+\textbf{求和规则。}$|M_{--}|^2 + |M_{+-}|^2 = \langle u_-(k_0)|\big[P_-(k_0+q) + P_+(k_0+q)\big]|u_-(k_0)\rangle = \langle u_-|u_-\rangle = 1$。
+
+\textbf{投影算符捷径（第二次独立推导）。}用附录~A 的 $\langle u_-|\sigma_a|u_-\rangle = -\hat d_a$：
+$$|M_{m,-}(k_0,q)|^2 = \langle u_-(k_0)|P_m(k_0+q)|u_-(k_0)\rangle = \frac{1}{2}\Big[1 + m\,\hat{\mathbf{d}}(k_0+q)\cdot\langle u_-(k_0)|\symbf{\sigma}|u_-(k_0)\rangle\Big] = \frac{1}{2}\Big[1 - m\,\hat{\mathbf{d}}(k_0+q)\cdot\hat{\mathbf{d}}(k_0)\Big],$$
+$m = +1$ 得 $\frac{1-\hat{\mathbf{d}}'\cdot\hat{\mathbf{d}}}{2}$（带间），$m = -1$ 得 $\frac{1+\hat{\mathbf{d}}'\cdot\hat{\mathbf{d}}}{2}$（带内），与显式代数一致。$\blacksquare$
+
+\textbf{形状因子修正（$\delta\neq0$）。}$M_{mn}(k,q) = \langle u_m(k+q)|\mathrm{diag}(1,e^{iq\delta})|u_n(k)\rangle$ 给重叠附加一个已知的规范弦 $q\delta$：对手性 SSH 情形，$|M_{+-}(0,q)|^2 = \sin^2\frac{q\delta+\phi(q)}{2}$（$\phi(q) = \arg[t_1 + t_2e^{-iqa}]$），将"纯测地距离"扭成"测地距离 + 已知弦相位"。$\delta = 0$（或 $q\delta\ll1$、或 $\hat F\propto\mathbb{1}$）恢复纯几何形式；$\delta = a/2$ 时两相谱完全相同（已知限制）。式~\eqref{eq:main_bragg} 的测地公式是普适内核，形状因子是可控的附加项。
+
+\textbf{小 $q$ 极限与量子几何。}展开 $\hat{\mathbf{d}}(k+q)\cdot\hat{\mathbf{d}}(k) \approx 1 - \frac{q^2}{2}|\partial_k\hat{\mathbf{d}}|^2$：
+$$|M_{+-}(k,q)|^2 \approx \frac{q^2}{4}\big|\partial_k\hat{\mathbf{d}}(k)\big|^2 = q^2\,g(k),$$
+其中 $g(k) = \frac{1}{4}|\partial_k\hat{\mathbf{d}}|^2$ 为量子度规（Fubini--Study 度规）；带内矩阵元 $M_{--}(k,q) \approx 1 - iq\,\mathcal{A}(k)$ 的相位给出 Berry 联络 $\mathcal{A}$。二维推广 $|M_{+-}|^2 \approx q_iq_j\,g_{ij}(\mathbf{k})$ 直接测量量子几何张量的对称部分；干涉型（环形）Bragg 协议进而可测 Berry 曲率与 Chern 数、Zak 相位 $\gamma = \pi\nu$——Bragg 谱学从"强度模式"升级到"几何模式"的同一平台路径。
+
+\bibliography{ref}
+\end{document}

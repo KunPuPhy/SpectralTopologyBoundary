@@ -1,0 +1,381 @@
+\documentclass[onecolumn,aps,prl,superscriptaddress,longbibliography]{revtex4-2}
+\setcounter{secnumdepth}{3}
+\raggedbottom
+\usepackage{iftex}
+\unless\ifxetex
+  \errmessage{^^JNOTE: This document requires XeLaTeX (ctex + unicode-math).^^JCompile with: bash .build/build.sh  or  latexmk Note.tex^^J}
+\fi
+\usepackage[colorlinks,bookmarks=false,citecolor=blue,linkcolor=red,urlcolor=blue]{hyperref}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{amsmath,amssymb,bm,braket,float,mathtools}
+\usepackage{unicode-math}
+\usepackage{graphicx,xfrac,appendix}
+\usepackage[english]{babel}
+\usepackage{physics}
+\usepackage{ctex}
+\usepackage{bbm}
+\usepackage{subfigure}
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{epstopdf}
+
+
+\makeatother
+%\documentclass[prb,twocolumn,showpacs,longbibliography]{revtex4-1}
+%\usepackage{xcolor}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{graphicx}
+%\usepackage{amsmath}
+%\usepackage{physics}
+%\usepackage{float}
+%\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=red,urlcolor=blue,citecolor=blue,pdftitle={Title},pdfauthor={},pdfdisplaydoctitle=true,pdfduplex=DuplexFlipLongEdge]{hyperref}
+%
+
+\begin{document}	
+
+\title{Limits of spectral probes in detecting topological matter}
+\author{Kun Pu}
+\email{kunpuphy@zjnu.edu.cn}
+\affiliation{Department of Physics, Zhejiang Normal University, Jinhua 321004, China}
+\date{\today}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+%%%%%%%%% 正文 %%%%%%%
+\section{Introduction}
+
+The classification of quantum matter by topology has become a central organizing principle of condensed matter physics since the quantum Hall effect was recognized as a topological phenomenon \cite{klitzing1980,thouless1982}. Gapped phases of matter are classified by integer-valued bulk invariants---the winding number in one dimension \cite{su1979,asboth2016} and the Chern number in two dimensions \cite{thouless1982,hasanKane2010,qiZhang2011}---rather than by local order parameters. These invariants are defined through the Bloch eigenstates: they record how the eigenstates wind as the crystal momentum traverses the Brillouin zone, and they are robust against any continuous deformation that keeps the bulk gap open. Two band structures may therefore share one and the same energy spectrum and yet carry different invariants.
+
+Spectroscopy is the standard experimental window onto the eigenstates of quantum matter. Angle-resolved photoemission spectroscopy (ARPES) measures the single-particle spectral function (SPSF) and maps band dispersions and many-body effects with momentum and frequency resolution \cite{lv2019,chen2020,sobota2021}; scanning tunneling spectroscopy probes the same object in real space \cite{yin2021}. In cold-atom systems, Bragg spectroscopy measures the dynamical structure factor (DSF), the spectrum of density excitations \cite{stenger1999,rey2005}, and related light-scattering schemes have been proposed to identify topological states in optical lattices \cite{goldman2012,wang2014}. What all these probes return, however, are intensities: real, non-negative signals resolved in momentum and frequency, given by squared matrix elements between the eigenstates.
+
+So far, experiments have accessed topology only indirectly, through physical effects fixed by the invariant---the quantized Hall conductance \cite{thouless1982}, the bulk polarization \cite{kingsmith1993,thouless1983}, or the protected boundary states guaranteed by the bulk-boundary correspondence \cite{asboth2016}. Whether spectroscopy can go beyond this and reflect the invariant directly is the question that motivates the present work. The invariant is a property of the eigenstates, whereas the measured intensities are moduli squared of matrix elements; whether the topology survives this projection is therefore decided not by experimental refinement but by the structure of the probe. A recent proposal has brought the question into sharp focus \cite{estakeRoy2025}: the momentum-resolved spectral function was shown to carry the bulk topological quantum numbers, with the winding number readable directly in one dimension, yet the same intensities can yield false positives in higher dimensions, where topologically trivial bands produce spectra indistinguishable from topological ones. What remains unclear is where the limits of this direct route lie: for which probes, in which dimensions, and with which blind spots.
+
+In this work we address this question for the two standard spectral probes. We develop the SPSF and the DSF on the same footing within the minimal framework of the non-interacting two-band model (Secs.~\ref{sec:twoband} and \ref{sec:probes}), where both responses follow from one and the same eigenvalue problem. The derivation exposes a structure shared by the two probes: every spectral weight is the squared projection of a band eigenstate onto a reference state, and the probes differ only in the choice of the reference---a fixed axis tied to the lattice for the SPSF, the initial state of the system for the Bragg response. In the non-interacting model, where fermions and bosons share the same eigenstates, the two probes thus interrogate the same object through different matrix elements. This common structure makes the comparison like-for-like and shows Bragg spectroscopy to be slightly better placed as a detector of topology: its reference is intrinsic to the band structure rather than an external axis; its probe couples to the total density, so no resolution of internal states is required; and its reference moves with the state of the system, avoiding the blind spots of a fixed axis. The more important message, however, is the converse: because both probes are projection weights, they inherit the same structural limit. The winding number is the lift of an angle---equivalently, the integral of the argument of the complex number $e^{i\psi(k)}$---and an angle requires two signed components, its cosine and its sine; every spectral weight delivers only the cosine---one projection of the Bloch vector---so the argument is recovered only up to a fold. The fold is not empty: a winding trajectory sweeps the full circle of angles while a trivial one is confined to a subinterval, and this difference of ranges is imprinted on the cosine---which is why the intensities can sometimes distinguish the phases. The imprint is incomplete, with three consequences: band structures related by a mirror deformation leave every intensity unchanged while their invariants differ in sign; retraced trajectories share the intensities of winding ones, so even the magnitude of the invariant is unreliable unless the trajectory winds monotonically; and if the fixed reference axis of the spectral function is aligned with the chiral axis, the fold is lost altogether and the probe is blind across topologically distinct phases. A commensurate form factor can screen the Bragg signal in the same manner. These limits are present already in one dimension---where the spectral-function scheme had appeared complete---and they persist in higher dimensions, where the known false positives reappear as instances of the same mechanism.
+
+The remainder of the paper is organized as follows. Section~\ref{sec:twoband} introduces the two-band model and defines the winding number. Section~\ref{sec:probes} develops the two spectral probes of the non-interacting model---the SPSF and Bragg spectroscopy---and exposes their common projection structure. Section~\ref{sec:topo_probes} examines the probes as detectors of topology: the role of particle statistics, the general limits, and representative examples in which both probes succeed, only Bragg succeeds, or both fail. Section~\ref{sec:discussion} identifies the component that the intensities lack and where it could in principle be measured, recasts the blind spots in symmetry form, and follows them into higher dimensions. Section~\ref{sec:conclusion} concludes.
+
+
+\section{Winding number}\label{sec:twoband}
+
+We consider an ordinary lattice system with two internal degrees of freedom per unit cell (e.g., two sublattices, orbitals, or bands, labeled $\alpha$ and $\beta$). The Bloch Hamiltonian reads
+\begin{equation}
+  H = \sum_k \Psi_k^\dagger\, h(k)\, \Psi_k,
+  \qquad
+  \Psi_k = \begin{pmatrix} c_{k,\alpha} \\ c_{k,\beta} \end{pmatrix},
+\end{equation}
+where $h(k)$ is a $2\times 2$ Hermitian matrix acting on the internal-state space. Since the identity together with the three Pauli matrices, $\{\sigma_0,\sigma_x,\sigma_y,\sigma_z\}$, forms a complete basis of the space of $2\times 2$ Hermitian matrices, $h(k)$ admits the Pauli-matrix expansion
+\begin{equation}
+  h(k) = d_0(k)\,\sigma_0 + \vec{d}(k)\cdot\vec{\sigma}
+       = d_0(k)\,\sigma_0 + d_x(k)\,\sigma_x + d_y(k)\,\sigma_y + d_z(k)\,\sigma_z,
+\end{equation}
+with real coefficient functions $d_a(k)$. The identity component $d_0(k)$ merely shifts the spectrum without touching the eigenvectors and is thus topologically irrelevant; absorbing it, we write
+\begin{equation}
+  h(k) = \vec{d}(k)\cdot\vec{\sigma},
+\end{equation}
+where $\vec{\sigma}=(\sigma_x,\sigma_y,\sigma_z)$ are the Pauli matrices acting on the two-dimensional internal space. The band spectrum is $E_\pm(k)=\pm|\vec{d}(k)|$, so the system is gapped if and only if $\vec{d}(k)\neq 0$ for all $k$.
+
+For a system with chiral symmetry, there exists a chiral axis $\hat n_\Gamma$ in Bloch space such that the chiral operator $\Gamma=\hat n_\Gamma\cdot\vec{\sigma}$ anticommutes with the Hamiltonian,
+\begin{equation}
+  \{h(k),\Gamma\}=0.
+\end{equation}
+This requires
+\begin{equation}
+  \vec{d}(k)\cdot\hat n_\Gamma=0
+  \qquad\text{for all }k,
+\end{equation}
+so $\vec{d}(k)$ varies only in the two-dimensional plane perpendicular to the chiral axis. As $k$ traverses the Brillouin zone, $\vec{d}(k)$ traces a closed loop in this plane; the bulk gap (or pairing gap) being open means that the loop does not pass through the origin.
+
+The winding number $W$ counts how many times this loop winds around the origin. Equivalently, after normalizing $\hat{d}(k)=\vec{d}(k)/|\vec{d}(k)|$, the map $\hat{d}:S^1\to S^1$ has degree $W$; since the first homotopy group of $S^1$ is $\mathbb{Z}$, $W$ is an integer. Following Ref.~\cite{estakeRoy2025}, it is given by the component of $\hat{d}(k)\times\partial_k\hat{d}(k)$ along the chiral axis:
+\begin{equation}\label{eq:estake_winding}
+  W=\frac{1}{2\pi}\int_{-\pi}^{\pi} dk\,
+  \hat n_\Gamma\cdot
+  \left(\hat{d}(k)\times\frac{d}{dk}\hat{d}(k)\right).
+\end{equation}
+Thus $W=0$ means that the loop does not wind around the origin, while $W=\pm1$ means that it winds once, with the sign fixed by the orientation relative to $\hat n_\Gamma$. Equivalently, parametrizing the winding plane by an in-plane angle, $\hat{d}(k)=\cos\psi_k\,\hat e_1+\sin\psi_k\,\hat e_2$ with $\hat e_1\times\hat e_2=\hat n_\Gamma$, the integrand of Eq.~\eqref{eq:estake_winding} reduces to the differential of the argument, and the winding number takes the form
+\begin{equation}\label{eq:winding_argument}
+  W=\frac{1}{2\pi}\oint_{\rm BZ}d\bigl[\arg z(k)\bigr]
+  =\frac{\tilde\psi_\pi-\tilde\psi_{-\pi}}{2\pi},
+  \qquad
+  z(k)\equiv e^{i\psi_k}=\cos\psi_k+i\,\sin\psi_k,
+\end{equation}
+where the argument is followed along its continuous lift. The winding number is the integral of the argument of the complex number $z(k)$ that represents the Bloch vector on the winding circle. Reading out $W$ directly is therefore equivalent to measuring $z(k)$; by Euler's formula this requires both of its real components, $\cos\psi_k$ and $\sin\psi_k$. Whether a spectroscopy can read the winding number is thus the question of how much of $z(k)$ it can see.
+
+
+\section{Spectral probes}\label{sec:probes}
+\subsection{Single-particle spectral function}\label{subsec:spsf}
+\subsubsection{non-interaction model}\label{subsubsec:spsf_nonint}
+
+The measurement of the single-particle spectral function (SPSF) rests on angle-resolved photoemission spectroscopy (ARPES), which directly measures the photocurrent $I(k,\omega)$ via the photoelectric effect: a photon ejects an electron from the solid, and energy and momentum conservation map the measured kinetic energy and emission angle of the photoelectron back onto its binding energy and crystal momentum inside the solid. Under the sudden approximation \cite{lv2019,chen2020}---the photoelectron leaves instantaneously and without further interaction with the system left behind---the photocurrent factorizes as
+\begin{equation}\label{eq:arpes}
+  I(k,\omega) = I_0(k,\nu)\,A(k,\omega)\,f(\omega,T),
+\end{equation}
+where $A$ is the SPSF, $f(\omega,T)$ the Fermi--Dirac distribution, and $I_0(k,\nu)$ a prefactor set by the dipole matrix elements. Here $\nu$ and $T$ are external parameters fixed during the measurement. At zero temperature and with $I_0$ tuned to be approximately constant in $k$, the photocurrent is directly proportional to the spectral function in the occupied region, $I(k,\omega)\propto A(k,\omega)$.
+
+Theoretically, the SPSF is not postulated but derived: it is the absorptive part of the retarded single-particle Green's function \cite{bruusFlensberg2016,tafuri2026,estakeRoy2025},
+\begin{equation}\label{eq:spsf_def}
+  A_{\alpha\beta}(k,\omega) \equiv -2\,\mathrm{Im}\,G^R_{\alpha\beta}(k,\omega),
+\end{equation}
+whose diagonal elements $A_{\alpha\alpha}\geq 0$ are the quantities probed through Eq.~\eqref{eq:arpes}. The computation of the SPSF is thereby reduced to the computation of the retarded Green's function.
+
+The retarded Green's function is defined in real space and time as \cite{estakeRoy2025,bruusFlensberg2016}
+\begin{equation}\label{eq:green_def}
+  G^R_{\alpha\beta}(r_1,t_1;r_2,t_2) = -i\,\theta(t_1-t_2)\,\langle G|\{\hat{c}_{r_1,\alpha}(t_1),\,\hat{c}^{\dagger}_{r_2,\beta}(t_2)\}|G\rangle,
+\end{equation}
+where $\theta$ is the Heaviside step function, $\hat{c}_{r,\alpha}$ annihilates a fermion in the internal state $\alpha$ of the unit cell at position $r$ (sublattice, orbital, or spin), the operators are taken in the Heisenberg picture, and $|G\rangle$ is the many-body ground state---the half-filled Fermi sea with the lower band occupied for an insulator. The anticommutator reflects the fermionic statistics of the probe. The step function enforces causality---$G^R$ responds only to perturbations at earlier times, hence ``retarded''---and lends Eq.~\eqref{eq:green_def} its propagator reading: $G^R$ is the amplitude for a particle inserted at $(r_2,\beta,t_2)$ to be found at $(r_1,\alpha,t_1)$ \cite{bruusFlensberg2016}.
+
+For a system invariant under translations in space and time, $G^R$ depends only on the differences $r\equiv r_1-r_2$ and $t\equiv t_1-t_2$, and its momentum--frequency representation is defined by the Fourier transform \cite{estakeRoy2025}
+\begin{equation}\label{eq:green_ft}
+  G^R_{\alpha\beta}(k,\omega) = \sum_r e^{ik\cdot r}\int_{-\infty}^{\infty}dt\,e^{i\omega t}\,G^R_{\alpha\beta}(r,t).
+\end{equation}
+For the non-interacting two-band model of Sec.~\ref{sec:twoband}, the many-body average in Eq.~\eqref{eq:green_def} collapses onto the eigenvalue problem of $h(k)$. With momentum-space operators $\hat{c}_{k,s}=N^{-1/2}\sum_r e^{-ik\cdot r}\hat{c}_{r,s}$, Eq.~\eqref{eq:green_def} reads $G^R_{\alpha\beta}(k,t)=-i\theta(t)\langle G|\{\hat{c}_{k,\alpha}(t),\hat{c}^{\dagger}_{k,\beta}\}|G\rangle$. Let $|u_m(k)\rangle$ and $E_m(k)$, $m=\pm$, be the eigenvectors and eigenvalues of $h(k)$, and expand the operators in the band basis, $\hat{c}_{k,s}=\sum_m\langle s|u_m(k)\rangle\,\hat{d}_{k,m}$. In the ground state the lower band is filled and the upper band is empty; Pauli blocking therefore leaves exactly two processes---particle addition into the empty band $m=+$ and particle removal from the occupied band $m=-$---each contributing an oscillator $e^{-iE_m(k)t}$ weighted by the band projector,
+\begin{equation}\label{eq:green_time}
+  G^R_{\alpha\beta}(k,t) = -i\,\theta(t)\sum_{m=\pm}\langle\alpha|u_m(k)\rangle\langle u_m(k)|\beta\rangle\,e^{-iE_m(k)t}.
+\end{equation}
+The Fourier integral converges in the sense of distributions with the retarded prescription $\omega\to\omega+i0^+$, $\int_0^{\infty}dt\,e^{i(\omega-E_m+i0^+)t}=i/(\omega-E_m+i0^+)$, and Eq.~\eqref{eq:green_time} assembles into the resolvent
+\begin{equation}\label{eq:green_resolvent}
+  G^R(k,\omega) = \sum_{m=\pm}\frac{P_m(k)}{\omega-E_m(k)+i0^+},
+\end{equation}
+a $2\times 2$ matrix in the internal-state space, with band projectors
+\begin{equation}\label{eq:projector}
+  P_\pm(k) = |u_\pm(k)\rangle\langle u_\pm(k)| = \frac{1}{2}\Big[\sigma_0\pm\hat{d}(k)\cdot\vec{\sigma}\Big],
+  \qquad
+  \hat{d}(k)\equiv\frac{\vec{d}(k)}{|\vec{d}(k)|},
+\end{equation}
+where the second equality follows from the Pauli identity $(\hat{d}\cdot\vec{\sigma})^2=\sigma_0$ and requires the gap to remain open, $|\vec{d}(k)|>0$.
+
+The spectral function follows by taking the imaginary part of the resolvent Eq.~\eqref{eq:green_resolvent} term by term with the Sokhotski--Plemelj formula
+\begin{equation}\label{eq:sokhotski}
+  \frac{1}{x+i0^+} = \mathcal{P}\frac{1}{x}-i\pi\delta(x),
+\end{equation}
+whose principal-value part is real and does not contribute. Each band $m$ therefore contributes one $\delta$ line pinned at the band energy $E_m(k)$, with weight equal to the projection of the band eigenstate onto the resolved internal state, $A_{\alpha\beta}(k,\omega) = 2\pi\sum_{m=\pm}\langle\alpha|P_m(k)|\beta\rangle\,\delta\big(\omega-E_m(k)\big)$. For the diagonal element on the internal state $\alpha$ (the state with $\sigma_z=+1$, so that $\langle\alpha|\vec{\sigma}|\alpha\rangle=\hat{z}$), Eq.~\eqref{eq:projector} gives $\langle\alpha|P_\pm(k)|\alpha\rangle=\frac{1}{2}\big[1\pm\hat{d}_z(k)\big]$ and hence the main result
+\begin{equation}\label{eq:spsf_main}
+  A_{\alpha\alpha}(k,\omega)
+  = \pi\left(1+\frac{d_z(k)}{|\vec{d}(k)|}\right)\delta\big(\omega-E_+(k)\big)
+  + \pi\left(1-\frac{d_z(k)}{|\vec{d}(k)|}\right)\delta\big(\omega-E_-(k)\big)
+\end{equation}
+
+The weight has a transparent geometric meaning. Let
+\begin{equation}\label{eq:spsf_angle}
+  \theta_k\equiv\arccos\bigl[\hat d(k)\cdot\hat z\bigr]\in[0,\pi]
+\end{equation}
+be the angle between the normalized Bloch vector $\hat d(k)$ and the resolved axis $\hat z$---the Bloch-space direction of the internal state $\alpha$ on which the spectral function is resolved. Since $\hat d_z(k)=\hat d(k)\cdot\hat z=\cos\theta_k$, the weights of Eq.~\eqref{eq:spsf_main} are
+\begin{equation}\label{eq:spsf_cos}
+  w^A_\pm(k)\equiv\frac{1}{2}\bigl(1\pm\hat d_z(k)\bigr)
+  =\frac{1}{2}\bigl(1\pm\cos\theta_k\bigr),
+\end{equation}
+i.e., $w^A_+(k)=\cos^2(\theta_k/2)$ and $w^A_-(k)=\sin^2(\theta_k/2)$ by the half-angle identities. The SPSF thus depends on the Bloch vector $\hat d(k)$ only through $\cos\theta_k$---the cosine of its angle with the resolved axis. All dependence on the magnitude $|\vec d(k)|$ and on the azimuthal position of $\hat d(k)$ around $\hat z$ has dropped out: the spectrum is the projection of the Bloch trajectory onto the fixed axis $\hat z$, weighted band by band. Three readings of Eq.~\eqref{eq:spsf_cos} fix the intuition. If $\hat d(k)$ is parallel to the resolved axis, $\theta_k=0$, the upper-band weight saturates, $w^A_+=1$: the upper-band eigenstate coincides with the internal state $\alpha$. If $\hat d(k)$ is antiparallel, $\theta_k=\pi$, the lower-band weight saturates instead, $w^A_-=1$. If $\hat d(k)$ is perpendicular, $\theta_k=\pi/2$, the two weights are equal, $w^A_\pm=1/2$: the eigenstates divide symmetrically between the two internal states, and the resolved spectrum carries no information about the band polarization.
+
+\subsection{Bragg spectroscopy}\label{subsec:bragg}
+\subsubsection{non-interaction model}\label{subsubsec:bragg_nonint}
+
+The measurement of the dynamical structure factor (DSF) rests on Bragg spectroscopy, which directly measures the transition probability of a quantum gas driven by a moving optical potential \cite{stenger1999,rey2005}. Two laser beams with wave vectors and frequencies $(k_1,\omega_1)$ and $(k_2,\omega_2)$ illuminate the atomic cloud. An atom absorbs a photon from one beam and emits it, stimulated, into the other: this two-photon process connects two momentum states of the same internal ground state and hands the atom a well-defined net momentum $\hbar q=\hbar(k_1-k_2)$ and net energy $\hbar\omega=\hbar(\omega_1-\omega_2)$ \cite{stenger1999}. Momentum and energy transfer are predetermined by the laser configuration rather than postdetermined from the detected particle, which makes Bragg spectroscopy a stimulated, background-free measurement with independent control of $q$ and $\omega$ \cite{stenger1999}. Through the ac Stark shift the two interfering beams form a traveling light grating \cite{rey2005},
+\begin{equation}\label{eq:bragg_drive}
+  V(r,t) = V_0\cos(q\cdot r-\omega t),
+\end{equation}
+a density wave of wavelength $2\pi/q$ propagating at velocity $\omega/q$, with amplitude $V_0\propto\sqrt{I_1 I_2}$ set by the geometric mean of the beam intensities. In the experiment the drive is applied for a finite duration, and one records, as $\omega$ is scanned at fixed $q$, the fraction of atoms that has undergone the transition---read out either as the momentum-transferred population or as the energy deposited into the cloud, via time of flight \cite{stenger1999,rey2005}. This transition probability, resolved in $(q,\omega)$, is the Bragg spectrum. In the following we set $\hbar=1$, measuring frequencies in energy units, consistent with Sec.~\ref{subsec:spsf}.
+
+The grating couples to the total particle density, and the perturbation Hamiltonian reads
+\begin{equation}\label{eq:bragg_pert}
+  \hat V(t) = \int dr\, V(r,t)\,\hat\rho(r),
+  \qquad
+  \hat\rho(r) = \sum_{s=\alpha,\beta}\hat\psi_s^\dagger(r)\,\hat\psi_s(r),
+\end{equation}
+where $\hat\psi_s(r)$ annihilates a particle in internal state $s$ at position $r$. The Bragg probe is thus state-insensitive: it counts particles irrespective of the sublattice, orbital, or spin state they occupy---the exact opposite of the state-resolved detection underlying the photocurrent Eq.~\eqref{eq:arpes}.
+
+For a deep lattice with Wannier orbitals localized at $R_j+\delta_s$ ($\delta_s$ the offset of internal state $s$ within the unit cell, $\delta_\alpha=0$, $\delta_\beta=\delta$), the Fourier component $\hat\rho_q\equiv\int dr\,e^{iq\cdot r}\hat\rho(r)$ takes the compact form
+\begin{equation}\label{eq:rho_q}
+  \hat\rho_q = \sum_k \Psi_{k+q}^\dagger\,F(q)\,\Psi_k,
+  \qquad
+  F(q) = \begin{pmatrix} 1 & 0 \\ 0 & e^{iq\cdot\delta} \end{pmatrix},
+\end{equation}
+where $k$ runs over the first Brillouin zone and $k+q$ is understood modulo reciprocal lattice vectors. The diagonal entries $F_s(q)=e^{iq\cdot\delta_s}$ (multiplied by a Wannier envelope $\simeq1$ for localized orbitals \cite{rey2005}) are form factors: the two internal states sit at different positions inside the unit cell and therefore sample the density wave at phases differing by $q\cdot\delta$, the ratio of sublattice separation to grating wavelength. If the two states are spatially coincident, $F=\sigma_0$. The density component is Hermitian in the sense $\hat\rho_q^\dagger=\hat\rho_{-q}$, and $\hat\rho_0=\hat N$ counts particles.
+
+In terms of Eq.~\eqref{eq:rho_q} the drive becomes
+\begin{equation}\label{eq:bragg_hamiltonian}
+  \hat V(t) = \frac{V_0}{2}\left(\hat\rho_q\,e^{-i\omega t} + \hat\rho_q^\dagger\,e^{i\omega t}\right),
+\end{equation}
+a Hermitian combination of two elementary processes: the first term deposits momentum $q$ and energy $\omega$ into the system (absorption), the second removes them (stimulated emission). Hermiticity forbids discarding either term at the level of the Hamiltonian; the rotating-wave approximation below is therefore made on the transition amplitude, not on $\hat V(t)$ itself.
+
+The transition probability is computed by time-dependent perturbation theory in $V_0$ (the linear-response regime \cite{rey2005,bruusFlensberg2016}). The system starts in the many-body ground state $|G\rangle$ of $\hat H_0$, with energy $E_G$, and is driven from $t=0$. Expanding the state vector in eigenstates $|f\rangle$ of $\hat H_0$ with energies $E_f$, the amplitude for ending in $|f\rangle$ is, to first order,
+\begin{equation}\label{eq:bragg_amplitude}
+  c_f^{(1)}(t) = -i\int_0^t dt'\,\langle f|\hat V(t')|G\rangle\,e^{i(E_f-E_G)t'}.
+\end{equation}
+Upon inserting Eq.~\eqref{eq:bragg_hamiltonian}, the absorption term carries the phase $e^{i(E_f-E_G-\omega)t'}$ and is resonant whenever the drive frequency matches an excitation energy, $E_f-E_G\simeq\omega$, while the emission term carries $e^{i(E_f-E_G+\omega)t'}$ and oscillates rapidly for $\omega>0$. To leading order in $V_0$ only the resonant term accumulates phase (rotating-wave approximation); the counter-rotating term would contribute only on the negative-frequency side, which is empty for a ground-state initial condition.
+
+In the long-time limit the squared phase integral obeys $\big|\int_0^t dt'\,e^{i\Delta t'}\big|^2 = 4\sin^2(\Delta t/2)/\Delta^2 \to 2\pi t\,\delta(\Delta)$, so the transition probability grows linearly in time and the transition rate is given by Fermi's golden rule \cite{bruusFlensberg2016},
+\begin{equation}\label{eq:golden_rule}
+  \Gamma(q,\omega) = 2\pi\left(\frac{V_0}{2}\right)^2 \sum_f \big|\langle f|\hat\rho_q|G\rangle\big|^2\, \delta\big(E_f-E_G-\omega\big),
+\end{equation}
+whose $\delta$ function enforces energy conservation: only excitations whose energy equals the drive frequency are populated. The model-independent prefactor is fixed by the drive, and the entire spectral information resides in the dynamical structure factor
+\begin{equation}\label{eq:dsf_def}
+  S(q,\omega) \equiv \sum_f \big|\langle f|\hat\rho_q|G\rangle\big|^2\, \delta\big(\omega-(E_f-E_G)\big),
+\end{equation}
+the Lehmann representation of the zero-temperature, absorption-side density--density correlation function $\langle G|\hat\rho_{-q}(t)\hat\rho_q(0)|G\rangle$ \cite{stenger1999,bruusFlensberg2016}. The measured transition probability is thus directly proportional to the dynamical structure factor, $\Gamma(q,\omega)=2\pi(V_0/2)^2 S(q,\omega)$: the spectrum peaks whenever $\omega$ hits the energy of a density excitation, with peak height equal to the transition probability $|\langle f|\hat\rho_q|G\rangle|^2$ \cite{rey2005}, and scanning $(q,\omega)$ maps out the density response of the system. The computation of the Bragg spectrum is thereby reduced to the computation of $S(q,\omega)$, which we now perform for the non-interacting two-band model.
+
+For the two-band model of Sec.~\ref{sec:twoband}, $S(q,\omega)$ is fixed by the eigenvalue problem of $h(k)$ alone. Expanding the internal-state operators in the band basis, $\hat c_{k,s}=\sum_m\langle s|u_m(k)\rangle\,\hat d_{k,m}$ (Sec.~\ref{subsubsec:spsf_nonint}), the density operator becomes
+\begin{equation}\label{eq:rho_band}
+  \hat\rho_q = \sum_k\sum_{m,n=\pm} M_{mn}(k,q)\,\hat d_{k+q,m}^\dagger\,\hat d_{k,n},
+  \qquad
+  M_{mn}(k,q) = \langle u_m(k+q)|\,F(q)\,|u_n(k)\rangle,
+\end{equation}
+i.e. the density acts as a scattering matrix in band space: it removes a particle from band $n$ at momentum $k$ and re-inserts it in band $m$ at momentum $k+q$, with amplitude $M_{mn}(k,q)$---for $F=\sigma_0$, simply the coherent overlap $\langle u_m(k+q)|u_n(k)\rangle$ of two Bloch eigenstates at different momenta.
+
+Consider first the fermionic ground state of Sec.~\ref{subsubsec:spsf_nonint}: the half-filled Fermi sea with the lower band completely filled. For $q$ not a reciprocal lattice vector the intraband channel $\hat d_{k+q,-}^\dagger\hat d_{k,-}$ is Pauli-blocked (the final state is already occupied), so $\hat\rho_q|G\rangle$ is a superposition of interband particle--hole pairs $\hat d_{k+q,+}^\dagger\hat d_{k,-}|G\rangle$: each lower-band particle at $k$ is promoted to the upper band at $k+q$, at the excitation cost
+\begin{equation}\label{eq:bragg_excitation}
+  \Delta E(k,q) = E_+(k+q)-E_-(k) = |\vec d(k+q)|+|\vec d(k)| \geq 2\min_k|\vec d(k)|,
+\end{equation}
+where the bound is the spectral gap of Sec.~\ref{sec:twoband}---an insulator has no low-energy density response. The dynamical structure factor is therefore a gapped interband particle--hole continuum,
+\begin{equation}\label{eq:bragg_fermion}
+  S(q,\omega) = \sum_k |M_{+-}(k,q)|^2\, \delta\big(\omega-\Delta E(k,q)\big),
+\end{equation}
+one $\delta$ contribution per momentum $k$, weighted by the interband matrix element.
+
+For a condensate of non-interacting bosons---the initial state realized in cold-atom experiments---all $N$ particles occupy the single lower-band state $k_0$ (the band minimum), $\hat d_{k_0,-}|G\rangle=\sqrt{N}\,|G'\rangle$, and the $k$-sum collapses: each condensate particle is either scattered within the lower band or promoted across the gap, giving two discrete lines
+\begin{equation}\label{eq:bragg_bec}
+  S(q,\omega) = N\Big[|M_{--}(k_0,q)|^2\,\delta\big(\omega-\omega_{\mathrm{intra}}(q)\big) + |M_{+-}(k_0,q)|^2\,\delta\big(\omega-\omega_{\mathrm{inter}}(q)\big)\Big],
+\end{equation}
+with $\omega_{\mathrm{intra}}(q)=E_-(k_0+q)-E_-(k_0)$ and $\omega_{\mathrm{inter}}(q)=E_+(k_0+q)-E_-(k_0)$; the overall factor $N$ is the Bose enhancement. A single particle initially at $k_0$ produces the same two lines without the factor $N$---within the non-interacting model, fermions and bosons share the same eigenstates and matrix elements and differ only in how these are populated, a point to which we return in Sec.~\ref{sec:topo_probes}.
+
+Both Eqs.~\eqref{eq:bragg_fermion} and \eqref{eq:bragg_bec} hinge on the moduli of the band-space amplitudes, which for $F=\sigma_0$ follow in one line from the projectors of Eq.~\eqref{eq:projector}. The lower-band eigenstate diagonalizes $\hat d(k)\cdot\vec\sigma$ with eigenvalue $-1$, i.e. it carries pseudo-spin $\langle u_-(k)|\vec\sigma|u_-(k)\rangle=-\hat d(k)$, whence
+\begin{equation}\label{eq:bragg_weight}
+  |M_{m,-}(k,q)|^2 = \langle u_-(k)|P_m(k+q)|u_-(k)\rangle = \frac{1}{2}\Big[1-m\,\hat d(k+q)\cdot\hat d(k)\Big],
+  \qquad m=\pm,
+\end{equation}
+satisfying the sum rule $|M_{+-}|^2+|M_{--}|^2=1$ (by $P_++P_-=\sigma_0$): every particle either stays in the lower band or is promoted to the upper band---there is no third outcome, and the two lines of Eq.~\eqref{eq:bragg_bec} carry complementary, internally normalized weights.
+
+The main result follows by inserting Eq.~\eqref{eq:bragg_weight} into Eqs.~\eqref{eq:bragg_fermion} and \eqref{eq:bragg_bec}:
+\begin{equation}\label{eq:bragg_main}
+  S(q,\omega) = \frac{1}{2}\sum_k\Big[1-\hat d(k+q)\cdot\hat d(k)\Big]\, \delta\big(\omega-\Delta E(k,q)\big),
+\end{equation}
+The weight has the same geometric structure as the SPSF weight of Eq.~\eqref{eq:spsf_cos}, with a different reference. Let
+\begin{equation}\label{eq:bragg_angle}
+  \Theta(k,q)\equiv\arccos\bigl[\hat d(k+q)\cdot\hat d(k)\bigr]\in[0,\pi]
+\end{equation}
+be the angle between the normalized Bloch vector at the final momentum, $\hat d(k+q)$, and the initial reference state, $\hat d(k)$; for the condensate of Eq.~\eqref{eq:bragg_bec} the $k$-sum collapses to $k=k_0$, and the reference is the condensate's own Bloch vector $\hat d(k_0)$. Since $\hat d(k+q)\cdot\hat d(k)=\cos\Theta(k,q)$, the weights of Eq.~\eqref{eq:bragg_weight} are
+\begin{equation}\label{eq:bragg_cos}
+  |M_{m,-}(k,q)|^2=\frac{1}{2}\bigl[1-m\cos\Theta(k,q)\bigr],
+  \qquad m=\pm,
+\end{equation}
+i.e., $|M_{+-}(k,q)|^2=\sin^2[\Theta(k,q)/2]$ and $|M_{--}(k,q)|^2=\cos^2[\Theta(k,q)/2]$ by the half-angle identities. The Bragg spectrum thus depends on the Bloch vector only through the cosine of its angle with the initial reference state. If the two Bloch vectors coincide, $\Theta=0$ (in particular as $q\to0$), the intraband weight saturates: an adiabatically slow density modulation cannot bridge the gap. If they are antipodal, $\hat d(k+q)=-\hat d(k)$, then $\Theta=\pi$ and the interband weight saturates, $|M_{+-}|^2=1$: the two eigenstates are orthogonal, and the density operator promotes the particle with unit probability. For a chiral system ($d_z\equiv0$) with $\hat d(k)=(\cos\phi_k,\sin\phi_k,0)$, Eq.~\eqref{eq:bragg_cos} reduces to $|M_{+-}(k,q)|^2=\sin^2[(\phi_{k+q}-\phi_k)/2]$ and reads the azimuthal winding directly. Finally, a nontrivial form factor adds a known real-space phase to the overlap: for a sublattice offset $\delta$ the chiral weight becomes $|M_{+-}(k,q)|^2=\sin^2[(\phi_{k+q}-\phi_k+q\delta)/2]$, the angle twisted by the gauge string $q\delta$; for the commensurate offset $\delta=a/2$ of the SSH chain the two phases even yield identical spectra---a caveat to which we return in Sec.~\ref{sec:topo_probes}.
+
+The two probes can now be compared in one line. Both spectra depend on the Bloch vector through one and the same structure,
+\begin{equation}\label{eq:cos_structure}
+  w=\frac{1}{2}\bigl(1\pm\cos\vartheta\bigr),
+\end{equation}
+the cosine of the angle $\vartheta$ between $\hat d$ and a reference direction: Eqs.~\eqref{eq:spsf_cos} and \eqref{eq:bragg_cos} are two instances of this single formula. The entire difference between the ARPES and the Bragg spectrum lies in the reference that defines the angle. For the ARPES spectrum the reference is the fixed external axis $\hat z$ tied to the resolved internal state: $\theta_k$ is measured against a direction anchored to the lattice, which does not move with the system, and the spectrum is the projection of the Bloch trajectory onto that axis. For the Bragg spectrum the reference is the initial state's own Bloch vector $\hat d(k_0)$: $\Theta(k_0,q)$ is measured against a direction carried by the system itself, and the spectrum compares the trajectory with itself, independent of any external axis. This shared structure also fixes what a measurement of this type can and cannot deliver. The object to be read, by Eq.~\eqref{eq:winding_argument}, is the complex number $z(k)=e^{i\psi_k}$; fixing the angle uniquely requires both of its real components, $\cos\psi_k$ and $\sin\psi_k$, whereas every spectral weight of Eq.~\eqref{eq:cos_structure} delivers exactly one of them, a cosine, and nothing more. The partial information is nevertheless not empty. For a trajectory that winds monotonically, the two phases are distinguished by the range of the winding angle: $W\neq0$ forces $\psi_k$ through the full circle, while $W=0$ confines it to a proper subinterval. This difference of ranges is imprinted on the cosine: a full-range angle drives $\cos\psi_k$ across its baseline twice per turn, so that the crossings count out $2|W|$, whereas a confined angle may avoid the baseline altogether. In this sense a single cosine can reflect topology---incompletely, but genuinely. Whether it does so for a given probe depends on the reference. The ARPES angle is taken against a fixed axis of the lattice: it is the winding angle itself only if that axis lies in the winding plane; if the axis leaves the plane, the cosine is a reduced shadow of the winding angle, and when the axis coincides with the chiral axis the weight is flat and carries no winding information at all. The Bragg angle is taken against the initial state's own Bloch vector, a point of the trajectory, and is therefore always an angle in the winding plane---qualified by construction. What no cosine can do is fixed by the missing component. The fold $\vartheta\to-\vartheta$ identifies mirror images---the reflection $\psi_k\to-\psi_k$ leaves every weight unchanged while reversing $W$---so the sign of the winding number is invisible to both probes; and it identifies retraced paths with winding ones---a trajectory that doubles back inside a subinterval which happens to straddle the baseline shows the baseline crossings of a winding trajectory although $W=0$---so even the magnitude is unconfirmed unless the trajectory is known to wind monotonically. In counting language: the cosine registers how often the angle visits the baseline, whereas the winding number is the \emph{signed} count of these visits; the two agree exactly when every crossing has the same direction. Within a qualified reference and a monotone trajectory, the cosine data determine $|W|$; outside these conditions, the probes fail in the ways just listed. What would be required to lift the fold completely is the subject of Sec.~\ref{sec:discussion}.
+
+
+
+\section{Spectral probes of topological system}\label{sec:topo_probes}
+Distinct particle statistics must be taken into account in practice, since the single-particle spectral function (SPSF) probes fermions whereas Bragg spectroscopy probes bosons. In this work we restrict ourselves to the non-interacting single-particle model, in which fermions and bosons share one and the same set of eigenvalues and eigenfunctions. The SPSF and Bragg spectroscopy may thus be viewed as two distinct probes of the same object.
+
+
+\subsection{Examples: three lattice models}\label{subsec:examples}
+
+The three outcomes anticipated above---both probes succeed, only Bragg spectroscopy succeeds, both fail---are, in the language of Sec.~\ref{sec:probes}, the qualified case in which the difference of angle ranges is imprinted on both cosines, the out-of-plane reference of the ARPES angle, and the retrace that the missing sine leaves undetected; they are realized by three minimal number-conserving lattice models defined on one and the same lattice, so that their differences reduce entirely to the pattern of hopping amplitudes. The remaining consequence of the fold, the mirror, is model-independent and is taken up in Sec.~\ref{sec:discussion}. We introduce the common setting once. The lattice is one-dimensional with unit cells $j$ at positions $r_j=ja$ ($a$ the lattice constant), each cell containing two internal states $\alpha$ and $\beta$ (Sec.~\ref{sec:twoband}) with the fermionic operators $\hat{c}_{j,s}$ of Sec.~\ref{subsubsec:spsf_nonint} and the Fourier convention $\hat{c}_{j,s}=N^{-1/2}\sum_k e^{ikja}\hat{c}_{k,s}$. In the general tight-binding form, every term is either an on-site potential $\epsilon_s\,\hat{c}_{j,s}^{\dagger}\hat{c}_{j,s}$ or a hopping $t\,\hat{c}_{j,\mu}^{\dagger}\hat{c}_{j+n,\nu}+\mathrm{H.c.}$ connecting the internal state $\mu$ of cell $j$ to the state $\nu$ of cell $j+n$. In the Bloch Hamiltonian $h(k)=\vec{d}(k)\cdot\vec{\sigma}$ of Sec.~\ref{sec:twoband}, written in the internal-state basis $(\hat{c}_{k,\alpha},\hat{c}_{k,\beta})^{\mathrm{T}}$ with $\alpha$ the $\sigma_z=+1$ state, a bond of cell offset $n$ contributes the phase factor $e^{ikna}$: on-site potentials and same-sublattice bonds ($\mu=\nu$) enter the diagonal element $d_z$, inter-sublattice bonds ($\mu\neq\nu$) enter the off-diagonal element $d_x-id_y$. Hopping symbols are global: the same bond carries the same symbol in every model in which it appears. For the probe comparison we take the two internal states spatially coincident, $F(q)=\sigma_0$ in Eq.~\eqref{eq:rho_q}; the gauge string of a finite sublattice offset, noted at the end of Sec.~\ref{subsec:bragg}, is examined separately.
+
+\subsubsection{Model I: a number-conserving winding chain (both probes succeed)}\label{subsubsec:modelI}
+
+The first model adds to the bipartite chain a staggered potential and further-neighbor hoppings,
+\begin{equation}\label{eq:modelI}
+\hat{H}_{\mathrm{I}}=\sum_j\Big[
+m_z\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j,\alpha}-\hat{c}_{j,\beta}^{\dagger}\hat{c}_{j,\beta}\big)
++t_2\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j-1,\beta}+\mathrm{H.c.}\big)
+-t_2\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j+1,\beta}+\mathrm{H.c.}\big)
+-u\big(\hat{c}_{j+1,\alpha}^{\dagger}\hat{c}_{j,\alpha}+\mathrm{H.c.}\big)
++u\big(\hat{c}_{j+1,\beta}^{\dagger}\hat{c}_{j,\beta}+\mathrm{H.c.}\big)\Big].
+\end{equation}
+Here $m_z$ is a staggered on-site potential; $t_2$ is the inter-cell nearest-neighbor inter-sublattice hopping, whose third-neighbor partner (cell offset $+1$) carries the same magnitude at opposite sign, $-t_2$; and $u$ is the same-sublattice next-nearest-neighbor hopping, with opposite signs on the two sublattices ($-u$ on $\alpha$--$\alpha$, $+u$ on $\beta$--$\beta$), which keeps the diagonal elements strictly antisymmetric, $d_0\equiv0$. There is no intra-cell bond. Because the two inter-sublattice bonds at cell offsets $\mp1$ carry real amplitudes of equal magnitude and opposite sign, their phase factors combine into a purely imaginary off-diagonal element, $t_2e^{-ika}-t_2e^{+ika}=-2it_2\sin ka$, and
+\begin{equation}\label{eq:modelI_k}
+h_{\mathrm{I}}(k)=\big(m_z-2u\cos ka\big)\,\sigma_z+2t_2\sin(ka)\,\sigma_y,
+\qquad
+\vec{d}_{\mathrm{I}}(k)=\big(0,\;2t_2\sin ka,\;m_z-2u\cos ka\big).
+\end{equation}
+The trajectory of $\hat{\vec{d}}$ is the ellipse centered at $(0,m_z)$ with semi-axes $2|t_2|$ ($y$) and $2|u|$ ($z$), traversed once as $k$ crosses the Brillouin zone; its winding number around the origin is $W=\pm1$ if and only if $|m_z|<2|u|$, and the gap closes exactly on $|m_z|=2|u|$---the phase diagram of the Kitaev chain ($m_z\propto\mu$, $u\propto J$, $t_2\propto\Delta$), realized with on-site and hopping terms only, without pairing. The model is chiral, $\{\sigma_x,h\}=0$, with the resolved axis $\hat{z}$ lying \emph{in} the chiral plane. Accordingly the SPSF weight of Eq.~\eqref{eq:spsf_main} is momentum dependent, $\hat{d}_z=(m_z-2u\cos ka)/|\vec{d}|$: it changes sign twice in the winding phase---the signature that the spectral-function criterion of Ref.~\cite{estakeRoy2025} reads as a unit winding---and never in the trivial phase. The Bragg weight of Eq.~\eqref{eq:bragg_weight} saturates at unity for every condensate momentum $k_0$ in the winding phase (the ellipse encloses the origin, so every antipode $-\hat{\vec{d}}(k_0)$ lies on the trajectory) and remains below unity in the trivial phase. Both probes read the phase correctly.
+
+\subsubsection{Model II: the SSH chain (SPSF blind, Bragg succeeds)}\label{subsubsec:modelII}
+
+The second model is the SSH chain \cite{su1979,asboth2016}: two real nearest-neighbor inter-sublattice hoppings, the intra-cell bond $t_1$ and the inter-cell bond $t_2$ of model I,
+\begin{equation}\label{eq:modelII}
+\hat{H}_{\mathrm{II}}=\sum_j\Big[
+t_1\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j,\beta}+\mathrm{H.c.}\big)
++t_2\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j-1,\beta}+\mathrm{H.c.}\big)\Big].
+\end{equation}
+Both amplitudes being real, the off-diagonal Bloch element is $t_1+t_2e^{-ika}$ and
+\begin{equation}\label{eq:modelII_k}
+h_{\mathrm{II}}(k)=\big(t_1+t_2\cos ka\big)\,\sigma_x+t_2\sin(ka)\,\sigma_y,
+\qquad
+\vec{d}_{\mathrm{II}}(k)=\big(t_1+t_2\cos ka,\;t_2\sin ka,\;0\big).
+\end{equation}
+The trajectory is the circle of radius $|t_2|$ centered at $t_1\hat{x}$---the equator of the Bloch sphere; $W=\pm1$ iff $|t_1|<|t_2|$, with the gap closing at $|t_1|=|t_2|$. The model is chiral with $\Gamma=\sigma_z$: the resolved axis coincides with the chiral axis, $d_z\equiv0$, so the diagonal SPSF weight of Eq.~\eqref{eq:spsf_main} is exactly one half on both bands, in both phases---no spectroscopic signal whatsoever. The Bragg weight compares the trajectory with itself and is immune to this alignment: in the winding phase the circle encloses the origin, every antipode lies on it, and $|M_{+-}|^2$ reaches unity; in the trivial phase it encloses nothing and the weight stays below unity. Only Bragg spectroscopy separates the two phases.
+对第一个模型x方向加个常数项？
+
+
+
+\subsubsection{Model III: a retraced chain (both probes fail)}\label{subsubsec:modelIII}
+
+The third model reuses the same-sublattice bonds of model I and makes all inter-sublattice bonds purely imaginary,
+\begin{equation}\label{eq:modelIII}
+\begin{split}
+\hat{H}_{\mathrm{III}}=\sum_j\Big[
+&-u\big(\hat{c}_{j+1,\alpha}^{\dagger}\hat{c}_{j,\alpha}+\mathrm{H.c.}\big)
++u\big(\hat{c}_{j+1,\beta}^{\dagger}\hat{c}_{j,\beta}+\mathrm{H.c.}\big)\\
+&-ig\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j,\beta}-\hat{c}_{j,\beta}^{\dagger}\hat{c}_{j,\alpha}\big)
++\frac{ig}{2}\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j-2,\beta}-\hat{c}_{j-2,\beta}^{\dagger}\hat{c}_{j,\alpha}\big)\\
+&+\frac{ig}{2}\big(\hat{c}_{j,\alpha}^{\dagger}\hat{c}_{j+2,\beta}-\hat{c}_{j+2,\beta}^{\dagger}\hat{c}_{j,\alpha}\big)
+\Big].
+\end{split}
+\end{equation}
+Here $u$ is exactly as in model I (same bonds, same sign convention); $g$ sets the three imaginary inter-sublattice bonds---the intra-cell bond carries $-ig$ and the two partners at cell offsets $\mp2$ carry $ig/2$; there are no on-site potentials and no real inter-sublattice hoppings. The off-diagonal Bloch element is $-ig+(ig/2)(e^{-2ika}+e^{2ika})=-2ig\sin^2(ka)$, whence
+\begin{equation}\label{eq:modelIII_k}
+h_{\mathrm{III}}(k)=-2u\cos(ka)\,\sigma_z+2g\sin^2(ka)\,\sigma_y,
+\qquad
+\vec{d}_{\mathrm{III}}(k)=\big(0,\;2g\sin^2 ka,\;-2u\cos ka\big).
+\end{equation}
+Every component of $\vec{d}_{\mathrm{III}}$ is even in $k$, $\vec{d}(-k)=\vec{d}(k)$: the trajectory is traversed once and then retraced. It is the parabola $d_y=2g\big(1-d_z^2/4u^2\big)$ running from the pole $(0,0,-2u)$ at $k=0$ through $(2g,0)$ at $k=\pi/2a$ to the antipodal pole $(0,0,+2u)$ at $k=\pi/a$. A path traversed forward and backward winds nothing: $W=0$, while the gap $2\min_k|\vec{d}|$ stays open for $g,u\neq0$---a gapped, topologically trivial, chiral ($\Gamma=\sigma_x$) insulator. Both probes nevertheless report topology. The SPSF involves $\hat{d}_z\propto-2u\cos ka$, which changes sign twice (at $ka=\pm\pi/2$): the spectral-function criterion of Ref.~\cite{estakeRoy2025} reads a unit winding. And for a condensate at the band minimum $k_0=0$ (take $u>g$, so the minimum sits at the pole $\hat{\vec{d}}(0)=-\hat{z}$), the Bragg weight saturates: the antipode $+\hat{z}$ is attained, exactly once, at $k=\pi/a$, so $|M_{+-}(k_0,q)|^2=1$---complete weight transfer in a topologically trivial phase. The evenness $\vec{d}(-k)=\vec{d}(k)$ is not a fine-tuned accident but the work of an antiunitary symmetry (a pseudo time reversal), to which we return in Sec.~\ref{sec:discussion}; it forces $W=0$ while leaving both intensity patterns even in $k$.
+
+
+
+
+\section{Discussion}\label{sec:discussion}
+The preceding sections reduce to a single statement: the winding number is the integral of the argument of $z(k)=e^{i\psi_k}$; the argument requires two signed components; and every spectroscopic intensity delivers only one of them, a cosine. We now make this statement precise, indicate where the missing component could in principle be measured, and collect the questions that remain open.
+
+\subsection{The missing component and where it could be measured}\label{subsec:missing}
+
+The two components of the argument are the two matrix elements of the band projector. For the resolved internal state $\alpha$,
+\begin{equation}\label{eq:projector_elements}
+  \langle\alpha|P_\pm(k)|\alpha\rangle=\frac12\bigl(1\pm\cos\theta_k\bigr),
+  \qquad
+  \langle\alpha|P_\pm(k)|\beta\rangle=\pm\frac12\,\sin\theta_k\,e^{-i\phi_k},
+\end{equation}
+with $\theta_k$ the angle to the resolved axis and $\phi_k$ the azimuth around it. The diagonal element---the intensity channel of Eqs.~\eqref{eq:spsf_main} and \eqref{eq:spsf_cos}---carries the cosine. The off-diagonal element carries the transverse information, but with a caveat that matters: its \emph{modulus} gives $|\sin\theta_k|$, which is as even as the cosine and does not lift the fold---the retraced trajectory of Sec.~\ref{subsec:examples} shares both, point by point. What lifts the fold is the \emph{phase}: for a chiral trajectory the off-diagonal element is proportional to $-i\sin\psi_k$, and its argument, $\mp\pi/2$, is precisely the sign of $\sin\psi_k$; in general the phase carries the azimuth $\phi_k$. The sine that completes the argument is therefore a phase-sensitive quantity, not another intensity. The same division holds for Bragg spectroscopy: the weight of Eq.~\eqref{eq:bragg_cos} is the modulus squared of the matrix element $M_{mn}(k,q)$, and the phase of $M$ carries the transverse information. In principle, then, the argument---and with it the winding number, sign included---is fully determined by coherent access to the off-diagonal channel: the one-body density matrix measured through first-order coherence, the complex transition amplitude of the Bragg process, or a diagonal measurement in a rotated internal basis, which is equivalent to a coherent superposition of the two resolved states. A proposal of precisely this type---first-order coherence supplying the $\sin\Theta\,e^{-i\Phi}$ channel---has been made in Ref.~\cite{estakeRoy2025} to repair the two-dimensional false positives of the spectral-function scheme. We do not pursue experimental realizations here; we note only that none of these channels is an intensity, which is why no refinement of the measurements of Sec.~\ref{sec:probes} can substitute for them.
+
+One further channel deserves mention because it lives \emph{inside} the intensities: the form-factor string of the sublattice offset. As noted at the end of Sec.~\ref{subsec:bragg}, an offset $\delta$ rotates the Bragg reference by the known angle $q\delta$; this is the only place where a fixed, orientation-carrying object enters an intensity, and it can in principle break the mirror degeneracy. Its reach is limited: $\delta$ is a sample-geometry parameter fixed at fabrication, and at the commensurate value $\delta=a/2$ the distinction is erased altogether.
+
+\subsection{Symmetry form of the blind spots}\label{subsec:symmetry}
+
+The two structural blind spots admit an exact symmetry statement. The intensity data of both probes are invariant under any reflection of the Bloch trajectory through a plane containing the reference axis, while the winding number is odd under such a reflection; this is the precise content of the sign blindness, and it is kinematic---a property of what is measured, not of how well it is measured. The retrace blindness of the third model is likewise the work of a symmetry: an antiunitary pseudo-time-reversal forces $\vec d(-k)=\vec d(k)$, the trajectory is traversed forward and backward, $W=0$, and both intensity patterns remain even in $k$, reproducing point by point the pattern of a winding trajectory. Symmetries, not signal quality, decide what the intensities can see.
+
+\subsection{Higher dimensions}\label{subsec:higher}
+
+In two dimensions the invariant is no longer the lift of a single angle but the degree of the map $(\Theta,\Phi)$ from the Brillouin torus to the sphere. A diagonal spectral function delivers one coordinate of this map, $\cos\Theta$; one coordinate cannot determine a two-coordinate map, and the known two-dimensional false positives of the spectral-function scheme are instances of exactly this. The completion is the same as in one dimension---the coherent channel $\sin\Theta\,e^{-i\Phi}$---and the questions of principle collected in Sec.~\ref{sec:conclusion} persist.
+
+\section{conclusion}\label{sec:conclusion}
+The logic of this work is a single chain. The winding number of a one-dimensional chiral two-band system is the integral of the argument of the complex number $z(k)=e^{i\psi_k}$ that represents the Bloch vector in the winding plane: measuring the winding number directly means measuring $z(k)$, which by Euler's formula requires both of its real components, the cosine and the sine. Every spectroscopic intensity considered here delivers exactly one component, a cosine: the diagonal spectral function delivers the cosine of the angle between the Bloch vector and a fixed axis of the lattice, the Bragg weight the cosine of the angle between the Bloch vector and the system's own initial state. One cosine fixes the argument only up to a fold, but the fold retains a genuine part of the topology: a winding trajectory sweeps the full circle of angles, a trivial one is confined to a subinterval, and the cosine records this difference of ranges through its baseline crossings. Within a qualified reference and a monotone trajectory, the cosine data therefore determine $|W|$---the complete statement of when and why intensity spectroscopy reads topology. Outside these conditions, the same fold has three consequences, each realized by a lattice model in Sec.~\ref{sec:topo_probes}: mirror-related band structures are indistinguishable, so the sign of the winding number is invisible to any intensity; a retraced trajectory reproduces the intensities of a winding one, so even the magnitude is unreliable without monotonicity; and a fixed axis aligned with the chiral axis removes the fold altogether, leaving the spectral function exactly blind across a topological phase boundary.
+
+The comparison between the two probes is a corollary of the same chain. The Bragg cosine is that of the relative angle to a reference carried by the trajectory itself; it is always a fold of the winding angle, and its saturation at the antipode is a necessary condition for $W\neq0$---but, by the retrace mechanism, not a sufficient one. The ARPES cosine is that of the angle to an axis fixed by the lattice, which need not be related to the winding angle at all; its signal is accordingly neither necessary nor sufficient.
+
+The missing component is the sine, and it lives in no modulus: $|\sin|$ is as even as $\cos$, and the retraced pair shares both point by point. It lives in phases and coherences---the off-diagonal spectral function, the complex transition amplitude, the first-order coherence. Sufficiency, for either probe, requires adding this direct measurement of the sine; no amount of intensity data can substitute. What remains open is, first, the experimental realization of these phase-sensitive channels for topological bands, on which existing proposals have only begun; second, the certification of monotonicity, which no intensity data can provide even in principle, since the retraced pair reproduces every even function pointwise; third, the two-dimensional completion, where the invariant is the degree of a two-angle map and the minimal coherent protocol that determines it is not yet settled; and fourth, the status of the form-factor string---the only orientation channel inside the intensities---whose commensurate erasure at $\delta=a/2$ confines it to engineered geometries. The intensities, in short, measure half of an angle; reading the other half is the open problem.
+
+找完文献后再重写introduction
+\appendix
+
+\bibliography{ref}
+\end{document}
